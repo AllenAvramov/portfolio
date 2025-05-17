@@ -5,7 +5,7 @@ function PortfolioPage() {
   const [projects, setProjects] = useState([]);
 
   useEffect(() => {
-    axios.get('http://localhost:5000/api/projects')
+    axios.get('http://localhost:4000/api/projects')
       .then(response => {
         setProjects(response.data);
       })
