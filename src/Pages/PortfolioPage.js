@@ -8,7 +8,7 @@ function PortfolioPage() {
 
   useEffect(() => {
     console.log('Fetching projects...');
-    axios.get('http://localhost:4000/api/projects')
+    axios.get('${process.env.REACT_APP_API_URL}/api/projects')
       .then(response => {
         console.log('Response received:', response.data);
         setProjects(response.data);
