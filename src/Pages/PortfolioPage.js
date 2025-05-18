@@ -8,7 +8,7 @@ function PortfolioPage() {
 
   useEffect(() => {
     console.log('Fetching projects...');
-    axios.get('https://server-l1gu.onrender.com/api/projects')
+    axios.get('http://localhost:4000/api/projects')
       .then(response => {
         console.log('Response received:', response.data);
         setProjects(response.data);
