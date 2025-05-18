@@ -1,0 +1,172 @@
+.about-page {
+    min-height: 100vh;
+    background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+    padding: 2rem 0;
+}
+
+.about-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 1rem;
+}
+
+.page-title {
+    text-align: center;
+    color: #2d3436;
+    font-size: 2.5rem;
+    margin-bottom: 2rem;
+    font-weight: 700;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.terminals-wrapper {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+    margin-top: 2rem;
+}
+
+.terminal-container {
+    background: #1e1e1e;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+    transition: transform 0.3s ease;
+}
+
+.terminal-container:hover {
+    transform: translateY(-5px);
+}
+
+.terminal-header {
+    background: #2d2d2d;
+    padding: 0.75rem 1rem;
+    display: flex;
+    align-items: center;
+    border-bottom: 1px solid #3d3d3d;
+}
+
+.terminal-buttons {
+    display: flex;
+    gap: 0.5rem;
+    margin-right: 1rem;
+}
+
+.terminal-button {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    display: inline-block;
+}
+
+.terminal-button.close {
+    background: #ff5f56;
+}
+
+.terminal-button.minimize {
+    background: #ffbd2e;
+}
+
+.terminal-button.maximize {
+    background: #27c93f;
+}
+
+.terminal-title {
+    color: #fff;
+    font-size: 0.9rem;
+    opacity: 0.8;
+}
+
+.terminal-content {
+    padding: 1.5rem;
+    color: #fff;
+    font-family: 'Fira Code', 'Courier New', monospace;
+    font-size: 1rem;
+    line-height: 1.6;
+}
+
+.terminal-text {
+    animation: fadeIn 0.5s ease-in;
+}
+
+.command-line {
+    margin-bottom: 1rem;
+}
+
+.prompt {
+    color: #0d6efd;
+    font-weight: 600;
+}
+
+.command {
+    color: #fff;
+    margin: 0 0.5rem;
+}
+
+.branch {
+    color: #27c93f;
+    margin-left: 0.5rem;
+}
+
+.skills-section {
+    margin-top: 1.5rem;
+}
+
+.section-title {
+    color: #0d6efd;
+    font-size: 1.2rem;
+    margin: 1.5rem 0 1rem;
+    font-weight: 600;
+}
+
+.skills-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+}
+
+.skill-item {
+    background: rgba(255, 255, 255, 0.1);
+    padding: 0.75rem;
+    border-radius: 6px;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    transition: all 0.3s ease;
+}
+
+.skill-item:hover {
+    background: rgba(255, 255, 255, 0.2);
+    transform: translateX(5px);
+}
+
+.skill-item i {
+    color: #27c93f;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@media (max-width: 768px) {
+    .terminals-wrapper {
+        grid-template-columns: 1fr;
+    }
+
+    .page-title {
+        font-size: 2rem;
+    }
+
+    .terminal-content {
+        font-size: 0.9rem;
+    }
+}

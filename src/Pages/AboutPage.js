@@ -1,19 +1,21 @@
 import React from 'react';
+import './AboutPage.css';
 
-const Terminal = ({ text }) => {
-  const iconClass = "fa fa-circle";
-
+const Terminal = ({ text, title }) => {
   return (
-    <section className="w-80 w-md-50 rounded mb-5 shadow-lg">
-      <div className="bg-secondary p-2 rounded-top">
-        <i className={`${iconClass} text-danger me-2`} />
-        <i className={`${iconClass} text-warning me-2`} />
-        <i className={`${iconClass} text-success`} />
+    <div className="terminal-container">
+      <div className="terminal-header">
+        <div className="terminal-buttons">
+          <span className="terminal-button close"></span>
+          <span className="terminal-button minimize"></span>
+          <span className="terminal-button maximize"></span>
+        </div>
+        <div className="terminal-title">{title}</div>
       </div>
-      <div className="bg-dark text-light p-3 p-md-4 rounded-bottom" style={{ fontSize: '1.3rem', fontFamily: 'Courier New, monospace' }}>
+      <div className="terminal-content">
         {text}
       </div>
-    </section>
+    </div>
   );
 };
 
@@ -25,35 +27,66 @@ function AboutPage() {
   const bio = "Full Stack project that represents projects from GitHub.";
   const skills = {
     proficientWith: ["JavaScript", "React", "Node.js", "Express", "HTML", "CSS", "Git"],
-    exposedTo: ["Bootstrap"]
+    exposedTo: ["Bootstrap", "MongoDB", "TypeScript", "Redux", "Tailwind.css"]
   };
 
   const aboutMeText = (
-    <>
-      <p><span style={{ color: baseColor }}>{firstName}{lastName} $</span> cat about Tamar and Allen project</p>
-      <p><span style={{ color: baseColor }}>about: <span className="text-success">(main)</span> $</span> {bio}</p>
-    </>
+    <div className="terminal-text">
+      <p className="command-line">
+        <span className="prompt">{firstName}{lastName}</span>
+        <span className="command">$</span> cat about.txt
+      </p>
+      <p className="command-line">
+        <span className="prompt">about</span>
+        <span className="branch">(main)</span>
+        <span className="command">$</span> {bio}
+      </p>
+    </div>
   );
 
   const skillsText = (
-    <>
-      <p><span style={{ color: baseColor }}>{firstName}{lastName} $</span> cd skills/tools</p>
-      <p><span style={{ color: baseColor }}>skills/tools <span className="text-success">(main)</span> $</span> ls</p>
-      <p style={{ color: baseColor }}>Proficient With</p>
-      <ul className="list-unstyled">
-        {skills.proficientWith.map((skill, i) => <li key={i}>{skill}</li>)}
-      </ul>
-      <p style={{ color: baseColor }}>Exposed To</p>
-      <ul className="list-unstyled">
-        {skills.exposedTo.map((skill, i) => <li key={i}>{skill}</li>)}
-      </ul>
-    </>
+    <div className="terminal-text">
+      <p className="command-line">
+        <span className="prompt">{firstName}{lastName}</span>
+        <span className="command">$</span> cd skills/tools
+      </p>
+      <p className="command-line">
+        <span className="prompt">skills/tools</span>
+        <span className="branch">(main)</span>
+        <span className="command">$</span> ls
+      </p>
+      <div className="skills-section">
+        <h3 className="section-title">Proficient With</h3>
+        <div className="skills-grid">
+          {skills.proficientWith.map((skill, i) => (
+            <div key={i} className="skill-item">
+              <i className="fas fa-check-circle"></i>
+              {skill}
+            </div>
+          ))}
+        </div>
+        <h3 className="section-title">Exposed To</h3>
+        <div className="skills-grid">
+          {skills.exposedTo.map((skill, i) => (
+            <div key={i} className="skill-item">
+              <i className="fas fa-star"></i>
+              {skill}
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
   );
 
   return (
-    <div className="d-flex flex-column align-items-center mt-5">
-      <Terminal text={aboutMeText} />
-      <Terminal text={skillsText} />
+    <div className="about-page">
+      <div className="about-container">
+        <h1 className="page-title">About Us</h1>
+        <div className="terminals-wrapper">
+          <Terminal text={aboutMeText} title="About" />
+          <Terminal text={skillsText} title="Skills" />
+        </div>
+      </div>
     </div>
   );
 }
