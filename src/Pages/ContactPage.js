@@ -10,14 +10,18 @@ function ContactPage() {
         <div className="col-md-5 mb-4">
           <div className="contact-info card shadow-sm p-4 h-100">
             <h4 className="mb-3">Get in touch</h4>
-            <p><i className="fa fa-envelope me-2 text-primary"></i> Tamar - </p>
-            <p><i className="fa fa-envelope me-2 text-primary"></i> Tamarsapir05@gmail.com </p>
-            <p><i className="fa fa-map-marker me-2 text-primary"></i>Allen - </p>
-            <p><i className="fa fa-phone me-2 text-primary"></i>allenjob96@gmail.com</p>
+            <p><i className="fas fa-envelope me-2 text-primary"></i>Tamar - Tamarsapir05@gmail.com </p>
+            <p><i className="fas fa-envelope me-2 text-primary"></i>Allen - allenjob96@gmail.com</p>
             <div className="social-icons mt-4">
-              <a href="https://github.com" target="_blank" rel="noreferrer"><i className="fa fa-github"></i></a>
-              <a href="https://linkedin.com" target="_blank" rel="noreferrer"><i className="fa fa-linkedin"></i></a>
-              <a href="https://instagram.com" target="_blank" rel="noreferrer"><i className="fa fa-instagram"></i></a>
+              <a href="https://github.com/AllenAvramov" target="_blank" rel="noreferrer" className="me-3">
+                <i className="fab fa-github fa-2x"></i>
+              </a>
+              <a href="https://www.linkedin.com/in/allen-avramov-7ab938315/" target="_blank" rel="noreferrer" className="me-3">
+                <i className="fab fa-linkedin fa-2x"></i>
+              </a>
+              <a href="https://www.instagram.com/allenavramov/" target="_blank" rel="noreferrer">
+                <i className="fab fa-instagram fa-2x"></i>
+              </a>
             </div>
           </div>
         </div>
@@ -27,11 +31,11 @@ function ContactPage() {
           <form className="contact-form card shadow-sm p-4">
             <div className="mb-3">
               <label className="form-label">Your Name</label>
-              <input type="text" className="form-control" placeholder="John Doe" required />
+              <input type="text" className="form-control" placeholder="Name" required />
             </div>
             <div className="mb-3">
               <label className="form-label">Email Address</label>
-              <input type="email" className="form-control" placeholder="you@example.com" required />
+              <input type="email" className="form-control" placeholder="you@gmail.com" required />
             </div>
             <div className="mb-3">
               <label className="form-label">Message</label>
