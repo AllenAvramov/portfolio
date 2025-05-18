@@ -1,44 +1,93 @@
-.terminal-box {
-  background-color: #1e1e1e;
-  border-radius: 12px;
-  color: #ffffff;
-  max-width: 800px;
-  margin: auto;
-  font-family: 'Courier New', monospace;
+.skills-page {
+  min-height: 100vh;
+  background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+  padding: 2rem;
 }
 
-.terminal-header {
-  background-color: #2c2c2c;
-  border-radius: 8px 8px 0 0;
+.skills-container {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.skills-page .page-title {
+  text-align: center;
+  color: #333;
+  font-size: 2.5rem;
+  margin-bottom: 2rem;
+  font-weight: 700;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.command-line {
+  margin-bottom: 1rem;
   display: flex;
-  gap: 10px;
+  align-items: center;
+  gap: 0.5rem;
 }
-
-.dot {
-  width: 12px;
-  height: 12px;
-  border-radius: 50%;
-  display: inline-block;
-}
-
-.red { background-color: #ff5f56; }
-.yellow { background-color: #ffbd2e; }
-.green { background-color: #27c93f; }
 
 .prompt {
-  color: #0d6efd;
+  color: #0f0;
   font-weight: bold;
 }
 
-.skills-list {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.75rem;
+.branch {
+  color: #0ff;
+  margin-left: 0.5rem;
 }
 
-.skill-badge {
-  background: linear-gradient(135deg, #0d6efd, #6610f2);
-  padding: 0.5rem 1rem;
-  font-size: 1rem;
-  border-radius: 20px;
+.command {
+  color: #ffffff;
+}
+
+.skills-section {
+  margin-top: 2rem;
+}
+
+.section-title {
+  color: #0f0;
+  font-size: 1.2rem;
+  margin-bottom: 1rem;
+  border-bottom: 1px solid #3d3d3d;
+  padding-bottom: 0.5rem;
+}
+
+.skills-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 1rem;
+  margin-bottom: 2rem;
+}
+
+.skill-item {
+  background: rgba(255, 255, 255, 0.1);
+  padding: 1rem;
+  border-radius: 5px;
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  transition: all 0.3s ease;
+}
+
+.skill-item:hover {
+  background: rgba(255, 255, 255, 0.15);
+  transform: translateX(5px);
+}
+
+.skill-item i {
+  color: #0f0;
+  font-size: 1.2rem;
+}
+
+@media (max-width: 768px) {
+  .skills-page {
+    padding: 1rem;
+  }
+
+  .skills-grid {
+    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+  }
+
+  .page-title {
+    font-size: 2rem;
+  }
 }

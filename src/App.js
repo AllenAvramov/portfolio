@@ -8,7 +8,7 @@ import AdminPage from './Pages/AdminPage';
 import AboutPage from './Pages/AboutPage';
 import ContactPage from './Pages/ContactPage';
 import SkillsPage from './Pages/SkillsPage';
-import NavBar from './Components/NavBar';
+import NavBar from './Components/NavBar/NavBar';
 
 function App() {
   return (

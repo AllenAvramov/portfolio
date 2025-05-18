@@ -1,28 +1,78 @@
 import React from 'react';
 import './SkillsPage.css';
+import Terminal from '../Components/Terminal/Terminal.js';
 
-const skills = [
-  "C++", "C", "Python", "JavaScript", "Linux", "Java", "React", "Assembly"
-];
+
 
 function SkillsPage() {
-  return (
-    <div className="skills-page container py-5">
-      <h2 className="text-center mb-4">Our Skills</h2>
-      <div className="terminal-box shadow-lg p-4">
-        <div className="terminal-header p-2 mb-3">
-          <span className="dot red"></span>
-          <span className="dot yellow"></span>
-          <span className="dot green"></span>
-        </div>
-        <p className="text-light mb-3"><span className="prompt">Tamar&Allen $</span> cd skills</p>
-        <p className="text-light mb-3"><span className="prompt">skills (main) $</span> ls</p>
-        <div className="skills-list">
-          {skills.map((skill, i) => (
-            <span className="badge bg-gradient-primary text-white skill-badge" key={i}>
+  const skills = {
+    programming: ["C++", "C", "C#", "Python", "JavaScript", "TypeScript", "Java", "Bash", "Assembly"],
+    webDevelopment: ["Angular","React.js", "Node.js", "Express.js", "HTML", "CSS", "Bootstrap", "Tailwind", ".NET"],
+    databases: ["MongoDB", "MySQL", "PostgreSQL", "SQLite"],
+    tools: ["Git", "Linux", "Docker", "VS Code", "Android Studio"]
+  };
+
+  const skillsText = (
+    <div className="terminal-text">
+      <p className="command-line">
+        <span className="prompt">Tamar&Allen</span>
+        <span className="command">$</span> cd skills
+      </p>
+      <p className="command-line">
+        <span className="prompt">skills</span>
+        <span className="branch">(main)</span>
+        <span className="command">$</span> ls
+      </p>
+      <div className="skills-section">
+        <h3 className="section-title">Programming Languages</h3>
+        <div className="skills-grid">
+          {skills.programming.map((skill, i) => (
+            <div key={i} className="skill-item">
+              <i className="fas fa-code"></i>
               {skill}
-            </span>
+            </div>
           ))}
+        </div>
+
+        <h3 className="section-title">Web Development</h3>
+        <div className="skills-grid">
+          {skills.webDevelopment.map((skill, i) => (
+            <div key={i} className="skill-item">
+              <i className="fas fa-globe"></i>
+              {skill}
+            </div>
+          ))}
+        </div>
+
+        <h3 className="section-title">Databases</h3>
+        <div className="skills-grid">
+          {skills.databases.map((skill, i) => (
+            <div key={i} className="skill-item">
+              <i className="fas fa-database"></i>
+              {skill}
+            </div>
+          ))}
+        </div>
+
+        <h3 className="section-title">Tools & Technologies</h3>
+        <div className="skills-grid">
+          {skills.tools.map((skill, i) => (
+            <div key={i} className="skill-item">
+              <i className="fas fa-tools"></i>
+              {skill}
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
+  );
+
+  return (
+    <div className="skills-page">
+      <div className="skills-container">
+        <h1 className="page-title">Our Skills</h1>
+        <div className="terminals-wrapper">
+          <Terminal text={skillsText} title="Skills" />
         </div>
       </div>
     </div>
