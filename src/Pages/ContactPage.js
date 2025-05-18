@@ -13,14 +13,14 @@ function ContactPage() {
             <p><i className="fas fa-envelope me-2 text-primary"></i>Tamar - Tamarsapir05@gmail.com </p>
             <p><i className="fas fa-envelope me-2 text-primary"></i>Allen - allenjob96@gmail.com</p>
             <div className="social-icons mt-4">
-              <a href="https://github.com/AllenAvramov" target="_blank" rel="noreferrer" className="me-3">
-                <i className="fab fa-github fa-2x"></i>
+              <a href="https://github.com/AllenAvramov" target="_blank" rel="noreferrer" className="social-icon">
+                <i className="fab fa-github"></i>
               </a>
-              <a href="https://www.linkedin.com/in/allen-avramov-7ab938315/" target="_blank" rel="noreferrer" className="me-3">
-                <i className="fab fa-linkedin fa-2x"></i>
+              <a href="https://www.linkedin.com/in/allen-avramov-7ab938315/" target="_blank" rel="noreferrer" className="social-icon">
+                <i className="fab fa-linkedin"></i>
               </a>
-              <a href="https://www.instagram.com/allenavramov/" target="_blank" rel="noreferrer">
-                <i className="fab fa-instagram fa-2x"></i>
+              <a href="https://www.instagram.com/allenavramov/" target="_blank" rel="noreferrer" className="social-icon">
+                <i className="fab fa-instagram"></i>
               </a>
             </div>
           </div>
