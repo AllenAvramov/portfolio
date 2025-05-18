@@ -1,0 +1,29 @@
+.contact-page {
+  max-width: 900px;
+  margin: auto;
+}
+
+.contact-info p {
+  font-size: 1rem;
+}
+
+.contact-info .social-icons i {
+  font-size: 1.5rem;
+  margin-right: 15px;
+  color: #0d6efd;
+  transition: color 0.3s ease;
+}
+
+.contact-info .social-icons i:hover {
+  color: #0056b3;
+}
+
+.contact-form input,
+.contact-form textarea {
+  border-radius: 8px;
+  border: 1px solid #ced4da;
+}
+
+.contact-form button {
+  border-radius: 8px;
+}

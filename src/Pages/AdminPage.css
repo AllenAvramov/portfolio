@@ -1,0 +1,25 @@
+.admin-page {
+  max-width: 1000px;
+  margin: auto;
+}
+
+.admin-card {
+  background: linear-gradient(145deg, #ffffff, #f1f1f1);
+  border: 1px solid #e0e0e0;
+  border-radius: 12px;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.admin-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 24px rgba(0, 0, 0, 0.1);
+}
+
+.admin-card button {
+  border-radius: 20px;
+  transition: all 0.3s ease;
+}
+
+.admin-card button:hover {
+  transform: scale(1.05);
+}

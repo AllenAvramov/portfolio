@@ -1,0 +1,33 @@
+.mockup-wrapper {
+  position: relative;
+  width: 100%;
+  max-width: 800px;
+  margin: auto;
+}
+
+.device-frame {
+  width: 100%;
+  display: block;
+  max-width: 100%;
+  object-fit: contain;
+}
+
+.project-inside-laptop {
+  position: absolute;
+  top: 17%;
+  left: 9.2%;
+  width: 58%;
+  height: 33%;
+  object-fit: cover;
+  border-radius: 6px;
+}
+
+.project-inside-mobile {
+  position: absolute;
+  top: 44%;
+  left: 12.2%;
+  width: 11.5%;
+  height: 19%;
+  object-fit: cover;
+  border-radius: 4px;
+}

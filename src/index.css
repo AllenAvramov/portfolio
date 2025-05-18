@@ -1,3 +1,4 @@
+/* GLOBAL STYLES */
 body {
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
@@ -5,9 +6,26 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+
+  /* background */
+  background: linear-gradient(135deg, #e3f2fd, #fce4ec);
+  min-height: 100vh;
 }
 
+/* CODE FONT */
 code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New', monospace;
+}
+
+/*PROJECT CARD STYLES*/
+.project-card-style {
+  background: linear-gradient(145deg, #ffffff, #f1f1f1);
+  border: 1px solid #e0e0e0;
+  border-radius: 12px;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.project-card-style:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.1);
 }
