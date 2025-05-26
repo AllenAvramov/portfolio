@@ -4,7 +4,7 @@ import MockupImage from './MockupForProj/MockupImage';
 function ProjectCard({ project }) {
   return (
     <div className="col hover-lift">
-    <div className="card h-100 w-80 mx-auto project-card-style">
+      <div className="card h-100 w-80 mx-auto project-card-style">
         {project.image && (
           <MockupImage projectImage={project.image} />
         )}
