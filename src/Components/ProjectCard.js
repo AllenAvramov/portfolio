@@ -5,9 +5,7 @@ function ProjectCard({ project }) {
   return (
     <div className="col hover-lift">
       <div className="card h-100 w-80 mx-auto project-card-style">
-        {project.image && (
-          <MockupImage projectImage={project.image} />
-        )}
+        <MockupImage projectImage={project.image} />
 
         <div className="card-body text-center">
           <h5 className="card-title fw-bold">{project.title}</h5>
