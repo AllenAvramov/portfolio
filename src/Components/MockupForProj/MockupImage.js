@@ -9,7 +9,7 @@ const MockupImage = ({ projectImage }) => {
   return (
     <div className="mockup-wrapper">
       <img
-        src="/img/projpic.png"
+        src={imageSrc}
         alt="Device Frame"
         className="device-frame"
       />
