@@ -1,7 +1,30 @@
-import React from 'react';
+import React, { useState } from 'react';
 import './ContactPage.css';
+import axios from 'axios';
 
 function ContactPage() {
+  const [formData, setFormData] = useState({
+    sender_name: '',
+    sender_email: '',
+    message: ''
+  });
+
+  const handleChange = e => {
+    setFormData({ ...formData, [e.target.name]: e.target.value });
+  };
+
+  const handleSubmit = async e => {
+    e.preventDefault();
+    try {
+      await axios.post('/api/messages', formData);
+      alert('Message sent!');
+      setFormData({ sender_name: '', sender_email: '', message: '' });
+    } catch (err) {
+      alert('Something went wrong.');
+      console.error(err);
+    }
+  };
+
   return (
     <div className="contact-page container py-5">
       <h2 className="text-center mb-5">Contact Us</h2>
@@ -28,18 +51,42 @@ function ContactPage() {
 
         {/* Contact Form */}
         <div className="col-md-7">
-          <form className="contact-form card shadow-sm p-4">
+          <form onSubmit={handleSubmit} className="contact-form card shadow-sm p-4">
             <div className="mb-3">
               <label className="form-label">Your Name</label>
-              <input type="text" className="form-control" placeholder="Name" required />
+              <input
+                type="text"
+                className="form-control"
+                name="sender_name"
+                value={formData.sender_name}
+                onChange={handleChange}
+                placeholder="Name"
+                required
+              />
             </div>
             <div className="mb-3">
               <label className="form-label">Email Address</label>
-              <input type="email" className="form-control" placeholder="you@gmail.com" required />
+              <input
+                type="email"
+                className="form-control"
+                name="sender_email"
+                value={formData.sender_email}
+                onChange={handleChange}
+                placeholder="you@gmail.com"
+                required
+              />
             </div>
             <div className="mb-3">
               <label className="form-label">Message</label>
-              <textarea className="form-control" rows="5" placeholder="Write your message..." required></textarea>
+              <textarea
+                className="form-control"
+                name="message"
+                value={formData.message}
+                onChange={handleChange}
+                rows="5"
+                placeholder="Write your message..."
+                required
+              ></textarea>
             </div>
             <button type="submit" className="btn btn-primary w-100">Send Message</button>
           </form>

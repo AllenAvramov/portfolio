@@ -1,16 +1,34 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import './SkillsPage.css';
 import Terminal from '../Components/Terminal/Terminal.js';
-
-
+import axios from 'axios';
 
 function SkillsPage() {
-  const skills = {
-    programming: ["C++", "C", "C#", "Python", "JavaScript", "TypeScript", "Java", "Bash", "Assembly"],
-    webDevelopment: ["Angular","React.js", "Node.js", "Express.js", "HTML", "CSS", "Bootstrap", "Tailwind", ".NET"],
-    databases: ["MongoDB", "MySQL", "PostgreSQL", "SQLite"],
-    tools: ["Git", "Linux", "Docker", "VS Code", "Android Studio"]
-  };
+  const [skills, setSkills] = useState({
+    programming: [],
+    web: [],
+    database: [],
+    tools: []
+  });
+
+  useEffect(() => {
+    axios.get('/api/skills')
+      .then(res => {
+        const grouped = {
+          programming: [],
+          web: [],
+          database: [],
+          tools: []
+        };
+        res.data.forEach(skill => {
+          if (grouped[skill.category]) {
+            grouped[skill.category].push(skill.name);
+          }
+        });
+        setSkills(grouped);
+      })
+      .catch(err => console.error('Failed to load skills', err));
+  }, []);
 
   const skillsText = (
     <div className="terminal-text">
@@ -23,33 +41,31 @@ function SkillsPage() {
         <span className="branch">(main)</span>
         <span className="command">$</span> ls
       </p>
+
       <div className="skills-section">
         <h3 className="section-title">Programming Languages</h3>
         <div className="skills-grid">
           {skills.programming.map((skill, i) => (
             <div key={i} className="skill-item">
-              <i className="fas fa-code"></i>
-              {skill}
+              <i className="fas fa-code"></i> {skill}
             </div>
           ))}
         </div>
 
         <h3 className="section-title">Web Development</h3>
         <div className="skills-grid">
-          {skills.webDevelopment.map((skill, i) => (
+          {skills.web.map((skill, i) => (
             <div key={i} className="skill-item">
-              <i className="fas fa-globe"></i>
-              {skill}
+              <i className="fas fa-globe"></i> {skill}
             </div>
           ))}
         </div>
 
         <h3 className="section-title">Databases</h3>
         <div className="skills-grid">
-          {skills.databases.map((skill, i) => (
+          {skills.database.map((skill, i) => (
             <div key={i} className="skill-item">
-              <i className="fas fa-database"></i>
-              {skill}
+              <i className="fas fa-database"></i> {skill}
             </div>
           ))}
         </div>
@@ -58,8 +74,7 @@ function SkillsPage() {
         <div className="skills-grid">
           {skills.tools.map((skill, i) => (
             <div key={i} className="skill-item">
-              <i className="fas fa-tools"></i>
-              {skill}
+              <i className="fas fa-tools"></i> {skill}
             </div>
           ))}
         </div>
