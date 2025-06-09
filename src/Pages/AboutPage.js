@@ -1,18 +1,29 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import './AboutPage.css';
 import Terminal from '../Components/Terminal/Terminal.js';
-
+import axios from 'axios';
 
 function AboutPage() {
   const firstName = "Tamar";
   const lastName = "&Allen";
-  const baseColor = "#0d6efd";
 
   const bio = "Full Stack project that represents projects from GitHub.";
-  const skills = {
-    proficientWith: ["JavaScript", "React", "Node.js", "Express", "HTML", "CSS", "Git"],
-    exposedTo: ["Bootstrap", "MongoDB", "TypeScript", "Redux", "Tailwind.css"]
-  };
+
+  const [proficientWith, setProficientWith] = useState([]);
+  const [exposedTo, setExposedTo] = useState([]);
+
+  useEffect(() => {
+    axios.get('/api/about-skills')
+      .then(res => {
+        const proficient = res.data.filter(skill => skill.type === 'proficient').map(skill => skill.name);
+        const exposed = res.data.filter(skill => skill.type === 'exposed').map(skill => skill.name);
+        setProficientWith(proficient);
+        setExposedTo(exposed);
+      })
+      .catch(err => {
+        console.error('Failed to load about skills', err);
+      });
+  }, []);
 
   const aboutMeText = (
     <div className="terminal-text">
@@ -42,19 +53,17 @@ function AboutPage() {
       <div className="skills-section">
         <h3 className="section-title">Proficient With</h3>
         <div className="skills-grid">
-          {skills.proficientWith.map((skill, i) => (
+          {proficientWith.map((skill, i) => (
             <div key={i} className="skill-item">
-              <i className="fas fa-check-circle"></i>
-              {skill}
+              <i className="fas fa-check-circle"></i> {skill}
             </div>
           ))}
         </div>
         <h3 className="section-title">Exposed To</h3>
         <div className="skills-grid">
-          {skills.exposedTo.map((skill, i) => (
+          {exposedTo.map((skill, i) => (
             <div key={i} className="skill-item">
-              <i className="fas fa-star"></i>
-              {skill}
+              <i className="fas fa-star"></i> {skill}
             </div>
           ))}
         </div>
