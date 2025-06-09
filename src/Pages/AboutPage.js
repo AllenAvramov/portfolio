@@ -13,7 +13,7 @@ function AboutPage() {
   const [exposedTo, setExposedTo] = useState([]);
 
   useEffect(() => {
-    axios.get('/api/about-skills')
+    axios.get('https://server-l1gu.onrender.com/api/about-skills')
       .then(res => {
         const proficient = res.data.filter(skill => skill.type === 'proficient').map(skill => skill.name);
         const exposed = res.data.filter(skill => skill.type === 'exposed').map(skill => skill.name);
