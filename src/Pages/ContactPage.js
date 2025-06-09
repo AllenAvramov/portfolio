@@ -16,7 +16,7 @@ function ContactPage() {
   const handleSubmit = async e => {
     e.preventDefault();
     try {
-      await axios.post('/api/messages', formData);
+      await axios.post('https://server-l1gu.onrender.com/api/messages', formData);
       alert('Message sent!');
       setFormData({ sender_name: '', sender_email: '', message: '' });
     } catch (err) {

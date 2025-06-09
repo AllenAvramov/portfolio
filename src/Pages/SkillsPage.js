@@ -12,7 +12,7 @@ function SkillsPage() {
   });
 
   useEffect(() => {
-    axios.get('/api/skills')
+    axios.get('https://server-l1gu.onrender.com/api/skills')
       .then(res => {
         const grouped = {
           programming: [],
