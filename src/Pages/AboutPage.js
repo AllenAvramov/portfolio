@@ -7,7 +7,43 @@ function AboutPage() {
   const firstName = "Tamar";
   const lastName = "&Allen";
 
-  const bio = "Full Stack project that represents projects from GitHub.";
+  const bio = `This is a modern personal portfolio website built using React.js. Here are the key features and technical details:
+
+Architecture:
+- Built with React.js using Create React App
+- Uses React Router for navigation
+- Implements a client-server architecture with a proxy to localhost:4000
+
+Main Pages:
+- Home/Portfolio Page (/)
+- Admin Page (/admin)
+- About Page (/about)
+- Contact Page (/contact)
+- Skills Page (/skills)
+
+UI/UX Features:
+- Modern UI with Bootstrap 5.3.6 for responsive design
+- Enhanced with Bootstrap Icons and Font Awesome for icons
+- Uses Framer Motion for smooth animations
+- Custom navigation bar component
+
+Technical Stack:
+- Frontend Framework: React 19.1.0
+- Routing: React Router DOM 7.5.3
+- Styling: Bootstrap 5.3.6
+- HTTP Client: Axios for API calls
+- Testing: Jest and React Testing Library
+
+Development Features:
+- Development server with hot reloading
+- Production build optimization
+- Testing setup with Jest
+- ESLint configuration for code quality
+- Browser compatibility configuration
+
+The project appears to be a professional portfolio website that showcases the developer's work, skills, and provides contact information. It's built with modern web technologies and follows best practices for React development. The inclusion of an admin page suggests there might be some content management functionality, and the proxy configuration indicates it's designed to work with a backend server running on port 4000.
+
+The project uses a clean, component-based architecture and implements modern web development practices, making it maintainable and scalable. The use of Bootstrap and other UI libraries ensures a professional and responsive design across different devices.`;
 
   const [proficientWith, setProficientWith] = useState([]);
   const [exposedTo, setExposedTo] = useState([]);
