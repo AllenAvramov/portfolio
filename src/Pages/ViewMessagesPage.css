@@ -1,0 +1,113 @@
+.messages-table {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0;
+  background: #ffffffcc;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.05);
+}
+
+.messages-table thead {
+  background: #f9f9f9;
+  color: #333;
+  font-weight: 600;
+}
+
+.messages-table th, .messages-table td {
+  padding: 12px 16px;
+  text-align: left;
+  border-bottom: 1px solid #eee;
+  font-size: 15px;
+}
+
+.messages-table tbody tr:hover {
+  background-color: #f0f4ff;
+  transition: background-color 0.2s ease;
+}
+
+.messages-table td:nth-child(4) {
+  white-space: pre-wrap;
+  line-height: 1.5;
+  max-width: 500px;
+}
+.messages-page {
+  padding: 40px 20px;
+  max-width: 1000px;
+  margin: auto;
+}
+
+.messages-page h2 {
+  margin-bottom: 20px;
+  font-weight: 600;
+  color: #222;
+}
+
+.messages-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.messages-table th, .messages-table td {
+  padding: 12px 10px;
+  border-bottom: 1px solid #eee;
+  text-align: left;
+  font-size: 14.5px;
+}
+
+.msg-cell {
+  max-width: 280px;
+  position: relative;
+}
+
+.toggle-btn {
+  background: none;
+  border: none;
+  color: #007bff;
+  font-size: 13px;
+  cursor: pointer;
+  margin-left: 5px;
+}
+
+.toggle-btn:hover {
+  text-decoration: underline;
+}
+
+.no-messages {
+  text-align: center;
+  color: #777;
+  padding: 30px 0;
+  font-style: italic;
+}
+.top-bar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: relative;
+  margin-bottom: 20px;
+}
+
+.back-btn {
+  background: none;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  padding: 6px 12px;
+  font-size: 14px;
+  cursor: pointer;
+  color: #333;
+  transition: 0.2s ease;
+  z-index: 1;
+}
+
+.back-btn:hover {
+  background: #f1f1f1;
+  border-color: #999;
+}
+
+.top-bar h2 {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  margin: 0;
+  font-size: 1.8rem;
+}

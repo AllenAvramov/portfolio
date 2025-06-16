@@ -95,7 +95,6 @@ The project uses a clean, component-based architecture and implements modern web
             </div>
           ))}
         </div>
-        <h3 className="section-title">Exposed To</h3>
         <div className="skills-grid">
           {exposedTo.map((skill, i) => (
             <div key={i} className="skill-item">

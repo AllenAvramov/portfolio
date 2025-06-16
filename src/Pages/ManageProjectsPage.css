@@ -1,0 +1,82 @@
+.projects-page {
+  max-width: 800px;
+  margin: auto;
+  padding: 40px 20px;
+  font-family: "Segoe UI", Roboto, sans-serif;
+  color: #333;
+}
+
+.projects-page h2 {
+  margin: 20px 0;
+  font-size: 1.5rem;
+  text-align: left;
+}
+
+.back-btn {
+  background: none;
+  border: none;
+  color: #555;
+  cursor: pointer;
+  margin-bottom: 15px;
+}
+.back-btn:hover { text-decoration: underline; }
+
+.add-btn {
+  background: #555;
+  color: white;
+  padding: 8px 14px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  margin-bottom: 20px;
+}
+
+.add-btn:hover { background: #444; }
+
+.projects-list {
+  list-style: none;
+  padding: 0;
+}
+
+.project-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: start;
+  padding: 16px;
+  border-bottom: 1px solid #eee;
+}
+
+.project-item:last-child { border-bottom: none; }
+
+.project-item h3 {
+  margin: 0 0 6px;
+  font-size: 1.2rem;
+  color: #222;
+}
+
+.project-item .desc {
+  margin: 0;
+  color: #555;
+  font-size: 0.95rem;
+}
+
+.actions button {
+  background: none;
+  border: 1px solid #888;
+  border-radius: 4px;
+  padding: 6px 12px;
+  cursor: pointer;
+  margin-left: 8px;
+  font-size: 0.9rem;
+}
+
+.actions button:hover { background: #f4f4f4; }
+
+.actions .delete {
+  border-color: #c24b4b;
+  color: #c24b4b;
+}
+
+.actions .delete:hover {
+  background: #fceaea;
+}
