@@ -15,7 +15,6 @@ function AdminLogin({ onLogin }) {
     });
 
     localStorage.setItem('token', res.data.token);
-    onLogin?.();
   } catch (err) {
     if (err.response) {
       alert(err.response.data.message || 'Login failed');
