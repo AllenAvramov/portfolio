@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import './ManageProjectsPage.css';
+import axios from 'axios';
 
 function ManageProjectsPage() {
   const navigate = useNavigate();
@@ -10,26 +11,35 @@ function ManageProjectsPage() {
   useEffect(() => {
     fetchProjects();
   }, []);
-
+  
   async function fetchProjects() {
-    const token = localStorage.getItem('token');
-    const res = await fetch('https://server-l1gu.onrender.com/api/projects', {
-      headers: { Authorization: `Bearer ${token}` }
-    });
-    const data = await res.json();
-    setProjects(data);
-    setLoading(false);
+    try {
+      const token = localStorage.getItem('token');
+      const res = await axios.get('https://server-l1gu.onrender.com/api/projects', {
+        headers: { Authorization: `Bearer ${token}` }
+      });
+      setProjects(res.data);
+    } catch (err) {
+      console.error('Error fetching projects:', err);
+    } finally {
+      setLoading(false);
+    }
   }
 
-const deleteProject = async (id) => {
-  const token = localStorage.getItem('token');
-  if (!window.confirm('Are you sure you want to delete this project?')) return;
-  await fetch(`https://server-l1gu.onrender.com/api/projects/${id}`, {
-    method: 'DELETE',
-    headers: { Authorization: `Bearer ${token}` }
-  });
-  fetchProjects();
-};
+  const deleteProject = async (id) => {
+    const token = localStorage.getItem('token');
+    if (!window.confirm('Are you sure you want to delete this project?')) return;
+  
+    try {
+      await axios.delete(`https://server-l1gu.onrender.com/api/projects/${id}`, {
+        headers: { Authorization: `Bearer ${token}` }
+      });
+  
+      fetchProjects(); // refresh the list after deletion
+    } catch (err) {
+      console.error('Error deleting project:', err);
+    }
+  };
 
 
   return (

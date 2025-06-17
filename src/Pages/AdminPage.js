@@ -9,7 +9,7 @@ function AdminPage() {
 
   useEffect(() => {
     const token = localStorage.getItem('token');
-    setIsAuthenticated(!!token); //if the token exist we are connected
+    setIsAuthenticated(!!token); // !!token = If there is a token → isAuthenticated will be true. If no token → isAuthenticated will be false.
   }, []);
 
   const handleLogin = () => {
@@ -39,7 +39,7 @@ function AdminPage() {
     }
   ];
 
-  if (!isAuthenticated) {
+  if (!isAuthenticated) { // if isAuthenticated === false ➞ show Admin Login Page
     return <AdminLogin onLogin={handleLogin} />;
   }
 

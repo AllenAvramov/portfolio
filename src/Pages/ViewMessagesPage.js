@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import './ViewMessagesPage.css';
+import axios from 'axios';
 
 function ViewMessagesPage() {
   const [messages, setMessages] = useState([]);
@@ -9,13 +10,17 @@ function ViewMessagesPage() {
 
   useEffect(() => {
     const fetchMessages = async () => {
-      const token = localStorage.getItem('token');
-      const res = await fetch('https://server-l1gu.onrender.com/api/admin/messages', {
-        headers: { Authorization: `Bearer ${token}` }
-      });
-      const data = await res.json();
-      setMessages(data);
+      try {
+        const token = localStorage.getItem('token');
+        const res = await axios.get('https://server-l1gu.onrender.com/api/admin/messages', {
+          headers: { Authorization: `Bearer ${token}` }
+        });
+        setMessages(res.data);
+      } catch (err) {
+        console.error('Error fetching messages:', err);
+      }
     };
+  
     fetchMessages();
   }, []);
 

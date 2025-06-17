@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import './AdminSettingsPage.css';
+import axios from 'axios';
 
 function AdminSettingsPage() {
   const navigate = useNavigate();
@@ -24,17 +25,19 @@ function AdminSettingsPage() {
     if (!window.confirm('Are you sure you want to delete all messages?')) return;
     setLoading(true);
     const token = localStorage.getItem('token');
-    await fetch('https://server-l1gu.onrender.com/api/admin/messages', {
-      method: 'DELETE',
-      headers: { Authorization: `Bearer ${token}` }
-    });
-    alert('All messages have been deleted.');
-    setLoading(false);
-  };
-
-  const saveSettings = () => {
-    localStorage.setItem('contactEmail', contactEmail);
-    alert('Settings saved successfully.');
+  
+    try {
+      await axios.delete('https://server-l1gu.onrender.com/api/admin/messages', {
+        headers: { Authorization: `Bearer ${token}` }
+      });
+  
+      alert('All messages have been deleted.');
+    } catch (err) {
+      console.error('Error deleting messages:', err);
+      alert('Failed to delete messages.');
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
