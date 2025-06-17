@@ -24,7 +24,7 @@ function AdminSettingsPage() {
     if (!window.confirm('Are you sure you want to delete all messages?')) return;
     setLoading(true);
     const token = localStorage.getItem('token');
-    await fetch('http://localhost:4000/api/admin/messages', {
+    await fetch('https://server-l1gu.onrender.com/api/admin/messages', {
       method: 'DELETE',
       headers: { Authorization: `Bearer ${token}` }
     });

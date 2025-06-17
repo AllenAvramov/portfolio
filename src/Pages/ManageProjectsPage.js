@@ -13,7 +13,7 @@ function ManageProjectsPage() {
 
   async function fetchProjects() {
     const token = localStorage.getItem('token');
-    const res = await fetch('http://localhost:4000/api/projects', {
+    const res = await fetch('https://server-l1gu.onrender.com/api/projects', {
       headers: { Authorization: `Bearer ${token}` }
     });
     const data = await res.json();
@@ -24,7 +24,7 @@ function ManageProjectsPage() {
 const deleteProject = async (id) => {
   const token = localStorage.getItem('token');
   if (!window.confirm('Are you sure you want to delete this project?')) return;
-  await fetch(`http://localhost:4000/api/projects/${id}`, {
+  await fetch(`https://server-l1gu.onrender.com/api/projects/${id}`, {
     method: 'DELETE',
     headers: { Authorization: `Bearer ${token}` }
   });
