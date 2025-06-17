@@ -9,27 +9,22 @@ function AdminLogin({ onLogin }) {
     e.preventDefault();
 
     try {
-      const res = await fetch('https://server-l1gu.onrender.com/api/login', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({ username, password })
-      });
+    const res = await axios.post('https://server-l1gu.onrender.com/api/login', {
+      username,
+      password
+    });
 
-      const data = await res.json();
-
-      if (res.ok) {
-        localStorage.setItem('token', data.token);
-        onLogin?.();
-      } else {
-        alert(data.message || 'Login failed');
-      }
-    } catch (err) {
+    localStorage.setItem('token', res.data.token);
+    onLogin?.();
+  } catch (err) {
+    if (err.response) {
+      alert(err.response.data.message || 'Login failed');
+    } else {
       console.error('Login error:', err);
       alert('Server error');
     }
-  };
+  }
+};
 
   return (
     <div className="admin-login-container">
