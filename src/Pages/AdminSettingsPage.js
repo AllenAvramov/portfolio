@@ -6,20 +6,26 @@ import axios from 'axios';
 function AdminSettingsPage() {
   const navigate = useNavigate();
 
-  const [contactEmail, setContactEmail] = useState('');
   const [theme, setTheme] = useState('light');
+  const [maintenanceMode, setMaintenanceMode] = useState(false);
   const [loading, setLoading] = useState(false);
 
   useEffect(() => {
-    setContactEmail(localStorage.getItem('contactEmail') || '');
     const savedTheme = localStorage.getItem('themeMode');
     setTheme(savedTheme === 'dark' ? 'dark' : 'light');
+
+    const savedMaintenance = localStorage.getItem('maintenanceMode');
+    setMaintenanceMode(savedMaintenance === 'true');
   }, []);
 
   useEffect(() => {
     document.body.classList.toggle('dark-mode', theme === 'dark');
     localStorage.setItem('themeMode', theme);
   }, [theme]);
+
+  useEffect(() => {
+    localStorage.setItem('maintenanceMode', maintenanceMode);
+  }, [maintenanceMode]);
 
   const deleteAllMessages = async () => {
     if (!window.confirm('Are you sure you want to delete all messages?')) return;
@@ -32,21 +38,12 @@ function AdminSettingsPage() {
       });
 
       alert('All messages have been deleted.');
-
-      // אופציונלי: ניתוב מחדש לרענון עמוד ההודעות (אם יש כזה)
-      // navigate('/admin/messages'); // אפשרי רק אם יש עמוד כזה
-
     } catch (err) {
       console.error('Error deleting messages:', err);
       alert('Failed to delete messages.');
     } finally {
       setLoading(false);
     }
-  };
-
-  const saveSettings = () => {
-    localStorage.setItem('contactEmail', contactEmail);
-    alert('Settings saved!');
   };
 
   return (
@@ -56,18 +53,6 @@ function AdminSettingsPage() {
       </button>
 
       <h2 className="text-center mb-4">Admin Settings</h2>
-
-      <section className="settings-section">
-        <h4>Communication Settings</h4>
-        <label>
-          Contact Email:
-          <input
-            type="email"
-            value={contactEmail}
-            onChange={(e) => setContactEmail(e.target.value)}
-          />
-        </label>
-      </section>
 
       <section className="settings-section">
         <h4>Appearance</h4>
@@ -82,7 +67,19 @@ function AdminSettingsPage() {
       </section>
 
       <section className="settings-section">
-        <h4>General Actions</h4>
+        <h4>General</h4>
+        <label className="toggle-label">
+          <input
+            type="checkbox"
+            checked={maintenanceMode}
+            onChange={(e) => setMaintenanceMode(e.target.checked)}
+          />
+          Enable Maintenance Mode
+        </label>
+      </section>
+
+      <section className="settings-section">
+        <h4>Admin Actions</h4>
         <button
           className="delete-btn"
           onClick={deleteAllMessages}
@@ -91,8 +88,6 @@ function AdminSettingsPage() {
           {loading ? 'Deleting...' : 'Delete All Messages'}
         </button>
       </section>
-
-      <button className="save-btn" onClick={saveSettings}>Save Settings</button>
     </div>
   );
 }

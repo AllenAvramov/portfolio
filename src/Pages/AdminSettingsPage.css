@@ -1,9 +1,14 @@
+body {
+  background-color: #fff;
+  color: #333;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
 .settings-page {
   max-width: 700px;
   margin: 0 auto;
   padding: 40px 20px;
   font-family: "Segoe UI", Roboto, sans-serif;
-  color: #333;
 }
 
 .settings-page h2 {
@@ -11,13 +16,12 @@
   margin-bottom: 30px;
   font-size: 1.6rem;
   font-weight: 500;
-  color: #222;
 }
 
 .back-btn {
   background: none;
   border: none;
-  color: #555;
+  color: inherit;
   font-size: 14px;
   cursor: pointer;
   margin-bottom: 20px;
@@ -39,7 +43,6 @@
   margin-bottom: 12px;
   font-size: 1.1rem;
   font-weight: 500;
-  color: #444;
 }
 
 .settings-section label {
@@ -48,13 +51,16 @@
   font-size: 14px;
 }
 
-.settings-section input[type="email"] {
+.settings-section input[type="email"],
+.settings-section input[type="text"],
+.settings-section textarea {
   margin-top: 6px;
   padding: 8px;
   font-size: 14px;
   border: 1px solid #ccc;
   border-radius: 4px;
   background: #fff;
+  color: #000;
 }
 
 .toggle-label {
@@ -93,36 +99,29 @@
   background: #444;
 }
 
-.dark-mode .settings-page {
-  background-color: #111;
-  color: #eee;
+.dark-mode body {
+  background-color: #000;
+  color: #fff;
 }
 
 .dark-mode .settings-section {
-  background-color: #222;
-  border-color: #555;
+  background-color: #111;
+  border-color: #333;
 }
 
-.dark-mode input[type="email"] {
-  background-color: #333;
+.dark-mode input,
+.dark-mode textarea {
+  background-color: #222;
   color: #fff;
-  border-color: #666;
+  border-color: #555;
 }
 
 .dark-mode .save-btn,
 .dark-mode .delete-btn {
-  background-color: #555;
+  background-color: #444;
   color: #fff;
 }
 
 .dark-mode .save-btn:hover {
-  background-color: #444;
-}
-
-body,
-.settings-page,
-.settings-section,
-input,
-button {
-  transition: background-color 0.3s ease, color 0.3s ease;
+  background-color: #333;
 }

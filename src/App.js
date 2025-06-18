@@ -17,6 +17,15 @@ import ViewMessagesPage from './Pages/ViewMessagesPage';
 import AdminSettingsPage from './Pages/AdminSettingsPage';
 
 function App() {
+  const isMaintenance = localStorage.getItem('maintenanceMode') === 'true';
+
+if (isMaintenance) {
+  return (
+    <div style={{ padding: '50px', textAlign: 'center', fontSize: '1.5rem' }}>
+      האתר כרגע בתחזוקה. נחזור לפעילות בהקדם!
+    </div>
+  );
+}
   return (
     <Router>
       <NavBar></NavBar>
