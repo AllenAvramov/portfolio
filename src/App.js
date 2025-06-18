@@ -17,15 +17,32 @@ import ViewMessagesPage from './Pages/ViewMessagesPage';
 import AdminSettingsPage from './Pages/AdminSettingsPage';
 
 function App() {
+  const location = useLocation();
   const isMaintenance = localStorage.getItem('maintenanceMode') === 'true';
 
-if (isMaintenance) {
-  return (
-    <div style={{ padding: '50px', textAlign: 'center', fontSize: '1.5rem' }}>
-      האתר כרגע בתחזוקה. נחזור לפעילות בהקדם!
-    </div>
+  const allowedDuringMaintenance = [
+    '/admin',
+    '/admin/login',
+    '/admin/settings',
+    '/admin/projects',
+    '/admin/messages',
+  ];
+
+  const isAllowed = allowedDuringMaintenance.some((path) =>
+    location.pathname.startsWith(path)
   );
-}
+
+  if (isMaintenance && !isAllowed) {
+    return (
+      <>
+        <NavBar />
+        <div style={{ padding: '50px', textAlign: 'center', fontSize: '1.5rem' }}>
+          האתר כרגע בתחזוקה. נחזור לפעילות בהקדם!
+        </div>
+      </>
+    );
+  }
+
   return (
     <Router>
       <NavBar></NavBar>
