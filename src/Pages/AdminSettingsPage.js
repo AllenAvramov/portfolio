@@ -40,6 +40,12 @@ function AdminSettingsPage() {
     }
   };
 
+  const saveSettings = () => {
+  localStorage.setItem('contactEmail', contactEmail);
+  alert('Settings saved!');
+};
+
+
   return (
     <div className="settings-page container py-5">
       <button className="back-btn" onClick={() => navigate('/admin')}>
