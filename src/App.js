@@ -15,6 +15,7 @@ import ProtectedRoute from './Components/Guards/ProtectedRoute';
 import ManageProjectsPage from './Pages/ManageProjectsPage';
 import ViewMessagesPage from './Pages/ViewMessagesPage';
 import AdminSettingsPage from './Pages/AdminSettingsPage';
+import { useLocation } from 'react-router-dom';
 
 function App() {
   const location = useLocation();
