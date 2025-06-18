@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import './ManageProjectsPage.css';
 import axios from 'axios';
-import AddProjectModal from './AddProjectModal';
+import AddProjectModal from './AddProjectPage';
 
 function ManageProjectsPage() {
   const navigate = useNavigate();
