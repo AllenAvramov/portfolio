@@ -16,6 +16,8 @@ import ProtectedRoute from './Components/Guards/ProtectedRoute';
 import ManageProjectsPage from './Pages/ManageProjectsPage';
 import ViewMessagesPage from './Pages/ViewMessagesPage';
 import AdminSettingsPage from './Pages/AdminSettingsPage';
+import AdminDashboardPage from './Pages/AdminDashboardPage';
+
 
 function AppRoutes() {
   const location = useLocation();
@@ -57,6 +59,7 @@ function AppRoutes() {
         <Route path="/admin/projects" element={<ProtectedRoute><ManageProjectsPage /></ProtectedRoute>} />
         <Route path="/admin/messages" element={<ProtectedRoute><ViewMessagesPage /></ProtectedRoute>} />
         <Route path="/admin/settings" element={<ProtectedRoute><AdminSettingsPage /></ProtectedRoute>} />
+        <Route path="/admin/dashboard" element={<ProtectedRoute><AdminDashboardPage /></ProtectedRoute>} />
       </Routes>
     </>
   );

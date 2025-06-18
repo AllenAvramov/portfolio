@@ -32,6 +32,11 @@ function AdminPage() {
       description: "Check messages sent via the contact form.",
       path: "/admin/messages"
     },
+      {
+    title: "Dashboard 📊",
+    description: "View statistics and analytics of your portfolio.",
+    path: "/admin/dashboard"
+  },
     {
       title: "Settings 🛠",
       description: "Update profile info, change theme and more.",
