@@ -20,3 +20,20 @@
   margin-bottom: 30px;
   box-shadow: 0 2px 6px rgba(0,0,0,0.1);
 }
+
+.back-btn {
+  background-color: transparent;
+  border: 2px solid #6c757d;
+  color: #6c757d;
+  padding: 8px 16px;
+  border-radius: 8px;
+  font-size: 16px;
+  transition: all 0.3s ease;
+  margin-bottom: 24px;
+}
+
+.back-btn:hover {
+  background-color: #6c757d;
+  color: #fff;
+  cursor: pointer;
+}

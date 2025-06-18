@@ -1,9 +1,19 @@
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
 import './AdminDashboardPage.css';
 
 function AdminDashboardPage() {
+  const navigate = useNavigate();
+
   return (
     <div className="dashboard-page container py-5">
+      <button
+        className="btn btn-outline-secondary mb-4"
+        onClick={() => navigate('/admin')}
+      >
+        ← Back to Admin
+      </button>
+
       <h2>Admin Dashboard</h2>
 
       <div className="dashboard-cards">

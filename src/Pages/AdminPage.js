@@ -2,15 +2,23 @@ import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import './AdminPage.css';
 import AdminLogin from '../Components/AdminLogin';
+import { isTokenExpired } from '../utils/auth'; 
 
 function AdminPage() {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const navigate = useNavigate();
 
-  useEffect(() => {
-    const token = localStorage.getItem('token');
-    setIsAuthenticated(!!token); // !!token = If there is a token → isAuthenticated will be true. If no token → isAuthenticated will be false.
-  }, []);
+useEffect(() => {
+  const token = localStorage.getItem('token');
+
+  if (!token || isTokenExpired(token)) {
+    localStorage.removeItem('token');
+    setIsAuthenticated(false);
+  } else {
+    setIsAuthenticated(true);
+  }
+}, []);
+
 
   const handleLogin = () => {
     setIsAuthenticated(true);
@@ -32,11 +40,11 @@ function AdminPage() {
       description: "Check messages sent via the contact form.",
       path: "/admin/messages"
     },
-      {
-    title: "Dashboard 📊",
-    description: "View statistics and analytics of your portfolio.",
-    path: "/admin/dashboard"
-  },
+    {
+      title: "Dashboard 📊",
+      description: "View statistics and analytics of your portfolio.",
+      path: "/admin/dashboard"
+    },
     {
       title: "Settings 🛠",
       description: "Update profile info, change theme and more.",
@@ -44,7 +52,7 @@ function AdminPage() {
     }
   ];
 
-  if (!isAuthenticated) { // if isAuthenticated === false ➞ show Admin Login Page
+  if (!isAuthenticated) {
     return <AdminLogin onLogin={handleLogin} />;
   }
 

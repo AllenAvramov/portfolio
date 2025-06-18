@@ -14,6 +14,7 @@ function ViewMessagesPage() {
         const token = localStorage.getItem('token');
         const res = await axios.get('https://server-l1gu.onrender.com/api/admin/messages', {
           headers: { Authorization: `Bearer ${token}` }
+          
         });
         setMessages(res.data);
       } catch (err) {
