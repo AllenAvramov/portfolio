@@ -16,8 +16,6 @@ import ProtectedRoute from './Components/Guards/ProtectedRoute';
 import ManageProjectsPage from './Pages/ManageProjectsPage';
 import ViewMessagesPage from './Pages/ViewMessagesPage';
 import AdminSettingsPage from './Pages/AdminSettingsPage';
-import AddProjectPage from './Pages/AddProjectPage';
-
 
 function AppRoutes() {
   const location = useLocation();
@@ -59,7 +57,6 @@ function AppRoutes() {
         <Route path="/admin/projects" element={<ProtectedRoute><ManageProjectsPage /></ProtectedRoute>} />
         <Route path="/admin/messages" element={<ProtectedRoute><ViewMessagesPage /></ProtectedRoute>} />
         <Route path="/admin/settings" element={<ProtectedRoute><AdminSettingsPage /></ProtectedRoute>} />
-        <Route path="/admin/projects/new" element={<ProtectedRoute><AddProjectPage /></ProtectedRoute>} />
       </Routes>
     </>
   );

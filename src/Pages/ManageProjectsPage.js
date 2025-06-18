@@ -2,16 +2,18 @@ import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import './ManageProjectsPage.css';
 import axios from 'axios';
+import AddProjectModal from '../Components/AddProjectModal';
 
 function ManageProjectsPage() {
   const navigate = useNavigate();
   const [projects, setProjects] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [showModal, setShowModal] = useState(false);
 
   useEffect(() => {
     fetchProjects();
   }, []);
-  
+
   async function fetchProjects() {
     try {
       const token = localStorage.getItem('token');
@@ -29,24 +31,30 @@ function ManageProjectsPage() {
   const deleteProject = async (id) => {
     const token = localStorage.getItem('token');
     if (!window.confirm('Are you sure you want to delete this project?')) return;
-  
+
     try {
       await axios.delete(`https://server-l1gu.onrender.com/api/projects/${id}`, {
         headers: { Authorization: `Bearer ${token}` }
       });
-  
+
       fetchProjects(); // refresh the list after deletion
     } catch (err) {
       console.error('Error deleting project:', err);
     }
   };
 
-
   return (
     <div className="projects-page container py-5">
+      <AddProjectModal
+        show={showModal}
+        onClose={() => setShowModal(false)}
+        onProjectAdded={fetchProjects}
+      />
+
       <button className="back-btn" onClick={() => navigate('/admin')}>← Back to Admin</button>
       <h2>Manage Projects</h2>
-      <button className="add-btn" onClick={() => navigate('/admin/projects/new')}>Add New Project</button>
+      
+      <button className="add-btn" onClick={() => setShowModal(true)}>Add New Project</button>
 
       {loading ? (
         <div>Loading...</div>
@@ -69,7 +77,7 @@ function ManageProjectsPage() {
         <div>No projects found.</div>
       )}
     </div>
-  )
+  );
 }
 
 export default ManageProjectsPage;
