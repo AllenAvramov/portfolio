@@ -93,12 +93,36 @@
   background: #444;
 }
 
-.dark-mode {
+.dark-mode .settings-page {
   background-color: #111;
   color: #eee;
 }
 
-.dark-mode .card {
+.dark-mode .settings-section {
   background-color: #222;
-  border-color: #444;
+  border-color: #555;
+}
+
+.dark-mode input[type="email"] {
+  background-color: #333;
+  color: #fff;
+  border-color: #666;
+}
+
+.dark-mode .save-btn,
+.dark-mode .delete-btn {
+  background-color: #555;
+  color: #fff;
+}
+
+.dark-mode .save-btn:hover {
+  background-color: #444;
+}
+
+body,
+.settings-page,
+.settings-section,
+input,
+button {
+  transition: background-color 0.3s ease, color 0.3s ease;
 }
