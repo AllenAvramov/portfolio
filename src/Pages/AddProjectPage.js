@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import './AddProjectModal.css';
+import './AddProjectPage.css';
 import axios from 'axios';
 
 function AddProjectModal({ show, onClose, onProjectAdded }) {
