@@ -25,13 +25,17 @@ function AdminSettingsPage() {
     if (!window.confirm('Are you sure you want to delete all messages?')) return;
     setLoading(true);
     const token = localStorage.getItem('token');
-  
+
     try {
       await axios.delete('https://server-l1gu.onrender.com/api/admin/messages', {
         headers: { Authorization: `Bearer ${token}` }
       });
-  
+
       alert('All messages have been deleted.');
+
+      // אופציונלי: ניתוב מחדש לרענון עמוד ההודעות (אם יש כזה)
+      // navigate('/admin/messages'); // אפשרי רק אם יש עמוד כזה
+
     } catch (err) {
       console.error('Error deleting messages:', err);
       alert('Failed to delete messages.');
@@ -41,10 +45,9 @@ function AdminSettingsPage() {
   };
 
   const saveSettings = () => {
-  localStorage.setItem('contactEmail', contactEmail);
-  alert('Settings saved!');
-};
-
+    localStorage.setItem('contactEmail', contactEmail);
+    alert('Settings saved!');
+  };
 
   return (
     <div className="settings-page container py-5">
@@ -85,7 +88,7 @@ function AdminSettingsPage() {
           onClick={deleteAllMessages}
           disabled={loading}
         >
-          Delete All Messages
+          {loading ? 'Deleting...' : 'Delete All Messages'}
         </button>
       </section>
 
@@ -95,4 +98,3 @@ function AdminSettingsPage() {
 }
 
 export default AdminSettingsPage;
-
