@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import './ManageProjectsPage.css';
 import axios from 'axios';
-import AddProjectPage from './AddProjectPage'; // שימי לב שזה תואם
+import AddProjectPage from './AddProjectPage';
 
 function ManageProjectsPage() {
   const navigate = useNavigate();
@@ -45,11 +45,13 @@ function ManageProjectsPage() {
 
   return (
     <div className="projects-page container py-5">
-      <AddProjectPage
-        show={showModal}
-        onClose={() => setShowModal(false)}
-        onProjectAdded={fetchProjects}
-      />
+<AddProjectPage
+  show={showModal}
+  onClose={() => setShowModal(false)}
+  onProjectAdded={fetchProjects}
+/>
+
+
 
       <button className="back-btn" onClick={() => navigate('/admin')}>← Back to Admin</button>
       <h2>Manage Projects</h2>

@@ -16,6 +16,7 @@ import ProtectedRoute from './Components/Guards/ProtectedRoute';
 import ManageProjectsPage from './Pages/ManageProjectsPage';
 import ViewMessagesPage from './Pages/ViewMessagesPage';
 import AdminSettingsPage from './Pages/AdminSettingsPage';
+import EditProjectPage from './Pages/EditProjectPage';
 import AdminDashboardPage from './Pages/AdminDashboardPage';
 
 
@@ -60,6 +61,10 @@ function AppRoutes() {
         <Route path="/admin/messages" element={<ProtectedRoute><ViewMessagesPage /></ProtectedRoute>} />
         <Route path="/admin/settings" element={<ProtectedRoute><AdminSettingsPage /></ProtectedRoute>} />
         <Route path="/admin/dashboard" element={<ProtectedRoute><AdminDashboardPage /></ProtectedRoute>} />
+        <Route path="/admin/projects/edit/:id" element={<EditProjectPage />} />
+        <Route path="/admin/projects/edit/:id" element={<ProtectedRoute><EditProjectPage /></ProtectedRoute>}/>
+
+        
       </Routes>
     </>
   );

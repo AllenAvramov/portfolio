@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import './AddProjectPage.css';
 import axios from 'axios';
 
-function AddProjectModal({ show, onClose, onProjectAdded }) {
+function AddProjectPage({ show, onClose, onProjectAdded }) {
   const [title, setTitle] = useState('');
   const [description, setDescription] = useState('');
   const [imageUrl, setImageUrl] = useState('');
@@ -72,16 +72,17 @@ function AddProjectModal({ show, onClose, onProjectAdded }) {
 
           <h4>Technologies:</h4>
           <div className="skills-list">
-            {allSkills.map(skill => (
-              <label key={skill.name}>
-                <input
-                  type="checkbox"
-                  checked={selectedSkills.includes(skill.name)}
-                  onChange={() => toggleSkill(skill.name)}
-                />
-                {skill.name}
-              </label>
-            ))}
+          {allSkills.map(skill => (
+  <label key={skill.id}>  
+    <input
+      type="checkbox"
+      checked={selectedSkills.includes(skill.name)}
+      onChange={() => toggleSkill(skill.name)}
+    />
+    {skill.name}
+  </label>
+))}
+
           </div>
 
           <div className="modal-actions">
@@ -94,4 +95,4 @@ function AddProjectModal({ show, onClose, onProjectAdded }) {
   );
 }
 
-export default AddProjectModal;
+export default AddProjectPage;
