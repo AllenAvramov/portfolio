@@ -26,7 +26,7 @@ function ContactPage() {
   };
 
   return (
-    <div className="contact-page container py-5">
+<div className="contact-page container-fluid py-5">
       <h2 className="text-center mb-5">Contact Us</h2>
       <div className="row">
         {/* Contact Info */}

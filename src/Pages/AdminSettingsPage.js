@@ -1,27 +1,24 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import './AdminSettingsPage.css';
 import axios from 'axios';
 
 function AdminSettingsPage() {
   const navigate = useNavigate();
 
-  const [theme, setTheme] = useState('light');
-  const [maintenanceMode, setMaintenanceMode] = useState(false);
+  const [isDark, setIsDark] = useState(() => {
+    return localStorage.getItem('themeMode') === 'dark';
+  });
+
+  const [maintenanceMode, setMaintenanceMode] = useState(() => {
+    return localStorage.getItem('maintenanceMode') === 'true';
+  });
+
   const [loading, setLoading] = useState(false);
 
   useEffect(() => {
-    const savedTheme = localStorage.getItem('themeMode');
-    setTheme(savedTheme === 'dark' ? 'dark' : 'light');
-
-    const savedMaintenance = localStorage.getItem('maintenanceMode');
-    setMaintenanceMode(savedMaintenance === 'true');
-  }, []);
-
-  useEffect(() => {
-    document.body.classList.toggle('dark-mode', theme === 'dark');
-    localStorage.setItem('themeMode', theme);
-  }, [theme]);
+    document.documentElement.setAttribute('data-bs-theme', isDark ? 'dark' : 'light');
+    localStorage.setItem('themeMode', isDark ? 'dark' : 'light');
+  }, [isDark]);
 
   useEffect(() => {
     localStorage.setItem('maintenanceMode', maintenanceMode);
@@ -47,47 +44,65 @@ function AdminSettingsPage() {
   };
 
   return (
-    <div className="settings-page container py-5">
-      <button className="back-btn" onClick={() => navigate('/admin')}>
+    <div className="container py-5">
+      <button className="btn btn-outline-secondary mb-4" onClick={() => navigate('/admin')}>
         ← Back to Admin
       </button>
 
-      <h2 className="text-center mb-4">Admin Settings</h2>
+      <h2 className="text-center mb-5">Admin Settings</h2>
 
-      <section className="settings-section">
-        <h4>Appearance</h4>
-        <label className="toggle-label">
-          <input
-            type="checkbox"
-            checked={theme === 'dark'}
-            onChange={(e) => setTheme(e.target.checked ? 'dark' : 'light')}
-          />
-          Enable Dark Mode
-        </label>
-      </section>
+      <div className="row justify-content-center">
+        <div className="col-md-6">
+          <div className="card shadow-sm mb-4">
+            <div className="card-body text-center">
+              <h5 className="card-title mb-3">Dark Mode</h5>
+              <div className="form-check form-switch d-flex justify-content-center">
+                <input
+                  className="form-check-input"
+                  type="checkbox"
+                  checked={isDark}
+                  onChange={() => setIsDark(!isDark)}
+                  id="darkModeSwitch"
+                />
+                <label className="form-check-label ms-2" htmlFor="darkModeSwitch">
+                  Enable Dark Mode
+                </label>
+              </div>
+            </div>
+          </div>
 
-      <section className="settings-section">
-        <h4>General</h4>
-        <label className="toggle-label">
-          <input
-            type="checkbox"
-            checked={maintenanceMode}
-            onChange={(e) => setMaintenanceMode(e.target.checked)}
-          />
-          Enable Maintenance Mode
-        </label>
-      </section>
+          <div className="card shadow-sm mb-4">
+            <div className="card-body text-center">
+              <h5 className="card-title mb-3">Maintenance Mode</h5>
+              <div className="form-check form-switch d-flex justify-content-center">
+                <input
+                  className="form-check-input"
+                  type="checkbox"
+                  checked={maintenanceMode}
+                  onChange={(e) => setMaintenanceMode(e.target.checked)}
+                  id="maintenanceSwitch"
+                />
+                <label className="form-check-label ms-2" htmlFor="maintenanceSwitch">
+                  Enable Maintenance Mode
+                </label>
+              </div>
+            </div>
+          </div>
 
-      <section className="settings-section">
-        <h4>Admin Actions</h4>
-        <button
-          className="delete-btn"
-          onClick={deleteAllMessages}
-          disabled={loading}
-        >
-          {loading ? 'Deleting...' : 'Delete All Messages'}
-        </button>
-      </section>
+          <div className="card shadow-sm mb-4">
+            <div className="card-body text-center">
+              <h5 className="card-title mb-3">Admin Actions</h5>
+              <button
+                className="btn btn-danger"
+                onClick={deleteAllMessages}
+                disabled={loading}
+              >
+                {loading ? 'Deleting...' : 'Delete All Messages'}
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
   );
 }

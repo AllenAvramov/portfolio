@@ -5,21 +5,6 @@ body {
   transition: background-color 0.3s ease, color 0.3s ease;
 }
 
-body.dark-mode {
-  background-color: #000;
-  color: #fff;
-}
-
-body.dark-mode .navbar {
-  background-color: #111 !important;
-  color: #fff;
-}
-
-body.dark-mode .nav-link,
-body.dark-mode .navbar-brand {
-  color: #fff !important;
-}
-
 .settings-page {
   max-width: 700px;
   margin: 0 auto;
@@ -115,26 +100,4 @@ body.dark-mode .navbar-brand {
 
 .save-btn:hover {
   background: #444;
-}
-
-body.dark-mode .settings-section {
-  background-color: #111;
-  border-color: #333;
-}
-
-body.dark-mode input,
-body.dark-mode textarea {
-  background-color: #222;
-  color: #fff;
-  border-color: #555;
-}
-
-body.dark-mode .save-btn,
-body.dark-mode .delete-btn {
-  background-color: #444;
-  color: #fff;
-}
-
-body.dark-mode .save-btn:hover {
-  background-color: #333;
 }

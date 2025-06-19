@@ -7,6 +7,9 @@
   align-items: center;
   padding: 2rem 1rem;
   text-align: center;
+  background-color: var(--bs-body-bg); /*var*/
+  color: var(--bs-body-color);
+  transition: background-color 0.3s ease, color 0.3s ease;
 }
 
 .App-link {
@@ -27,4 +30,48 @@
   to {
     transform: rotate(360deg);
   }
+}
+
+/* Bootstrap Dark Mode variables */
+[data-bs-theme="light"] {
+  --bs-body-bg: #fff;
+  --bs-body-color: #212529;
+}
+
+[data-bs-theme="dark"] {
+  --bs-body-bg: #000;
+  --bs-body-color: #fff;
+}
+
+/* Apply theme to body */
+body {
+  background-color: var(--bs-body-bg);
+  color: var(--bs-body-color);
+  font-family: "Segoe UI", Roboto, sans-serif;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* Card dark styling */
+[data-bs-theme="dark"] .card {
+  background-color: #111 !important;
+  color: #fff;
+  border-color: #333;
+}
+
+/* Button overrides */
+[data-bs-theme="dark"] .btn-outline-secondary {
+  color: #fff;
+  border-color: #aaa;
+}
+
+[data-bs-theme="dark"] .btn-outline-secondary:hover {
+  background-color: #444;
+}
+
+/* Typography overrides */
+[data-bs-theme="dark"] h2,
+[data-bs-theme="dark"] h5,
+[data-bs-theme="dark"] label,
+[data-bs-theme="dark"] .form-check-label {
+  color: #fff;
 }
