@@ -56,7 +56,7 @@ function AppRoutes() {
         <Route path="/contact" element={<ContactPage />} />
         <Route path="/skills" element={<SkillsPage />} />
         <Route path="/admin/login" element={<AdminLogin />} />
-        <Route path="/admin" element={<ProtectedRoute><AdminPage /></ProtectedRoute>} />
+        <Route path="/admin" element={<AdminPage />} />
         <Route path="/admin/projects" element={<ProtectedRoute><ManageProjectsPage /></ProtectedRoute>} />
         <Route path="/admin/messages" element={<ProtectedRoute><ViewMessagesPage /></ProtectedRoute>} />
         <Route path="/admin/settings" element={<ProtectedRoute><AdminSettingsPage /></ProtectedRoute>} />
@@ -64,7 +64,7 @@ function AppRoutes() {
         <Route path="/admin/projects/edit/:id" element={<EditProjectPage />} />
         <Route path="/admin/projects/edit/:id" element={<ProtectedRoute><EditProjectPage /></ProtectedRoute>} />
 
-        
+
 
 
       </Routes>
