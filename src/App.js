@@ -62,9 +62,11 @@ function AppRoutes() {
         <Route path="/admin/settings" element={<ProtectedRoute><AdminSettingsPage /></ProtectedRoute>} />
         <Route path="/admin/dashboard" element={<ProtectedRoute><AdminDashboardPage /></ProtectedRoute>} />
         <Route path="/admin/projects/edit/:id" element={<EditProjectPage />} />
-        <Route path="/admin/projects/edit/:id" element={<ProtectedRoute><EditProjectPage /></ProtectedRoute>}/>
+        <Route path="/admin/projects/edit/:id" element={<ProtectedRoute><EditProjectPage /></ProtectedRoute>} />
 
         
+
+
       </Routes>
     </>
   );
