@@ -59,6 +59,8 @@ function AddProjectPage({ show, onClose, onProjectAdded }) {
 
   if (!show) return null;
 
+  console.log('Modal should be visible, show:', show);
+
   return (
     <div className="modal-overlay">
       <div className="modal">
@@ -72,16 +74,16 @@ function AddProjectPage({ show, onClose, onProjectAdded }) {
 
           <h4>Technologies:</h4>
           <div className="skills-list">
-          {allSkills.map(skill => (
-  <label key={skill.id}>  
-    <input
-      type="checkbox"
-      checked={selectedSkills.includes(skill.name)}
-      onChange={() => toggleSkill(skill.name)}
-    />
-    {skill.name}
-  </label>
-))}
+            {allSkills.map(skill => (
+              <label key={skill.id}>
+                <input
+                  type="checkbox"
+                  checked={selectedSkills.includes(skill.name)}
+                  onChange={() => toggleSkill(skill.name)}
+                />
+                {skill.name}
+              </label>
+            ))}
 
           </div>
 
