@@ -14,7 +14,7 @@ function EditProjectPage() {
   const [liveUrl, setLiveUrl] = useState('');
   const [githubUrl, setGithubUrl] = useState('');
   const [allSkills, setAllSkills] = useState([]); // [{id,name}]
-  const [selectedIds, setSelectedIds] = useState([]);
+  const [selectedSkills, setSelectedSkills] = useState([]);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
@@ -36,8 +36,8 @@ function EditProjectPage() {
         setImageUrl(project.image_url ?? '');
         setLiveUrl(project.live_url ?? '');
         setGithubUrl(project.github_url ?? '');
-        setSelectedIds(project.technologies.map(t => t.id));
         setAllSkills(skillsRes.data);
+        setSelectedSkills(project.technologies.map(t => t.name));
         console.log('Fetched skills:', skillsRes.data);
       } catch (err) {
         console.error('Error fetching project/skills:', err);
@@ -57,6 +57,9 @@ function EditProjectPage() {
     const token = localStorage.getItem('token');
 
     try {
+      const skillIds = allSkills
+        .filter(s => selectedSkills.includes(s.name))
+        .map(s => s.id);
       await axios.put(
         `https://server-l1gu.onrender.com/api/projects/${id}`,
         {
@@ -65,7 +68,7 @@ function EditProjectPage() {
           image_url: imageUrl,
           live_url: liveUrl,
           github_url: githubUrl,
-          technologies: selectedIds
+          technologies: skillIds
         },
         { headers: { Authorization: `Bearer ${token}` } }
       );
@@ -78,10 +81,11 @@ function EditProjectPage() {
     }
   };
 
-  const toggleSkill = (skillId) => {
-    setSelectedIds(prev =>
-      prev.includes(skillId) ? prev.filter(id => id !== skillId)
-        : [...prev, skillId]
+  const toggleSkill = (skillName) => {
+    setSelectedSkills(prev =>
+      prev.includes(skillName)
+        ? prev.filter(s => s !== skillName)
+        : [...prev, skillName]
     );
   };
 
@@ -120,13 +124,11 @@ function EditProjectPage() {
                     <input
                       className="form-check-input"
                       type="checkbox"
-                      checked={selectedIds.includes(skill.id)}
-                      onChange={() => toggleSkill(skill.id)}
+                      checked={selectedSkills.includes(skill.name)}
+                      onChange={() => toggleSkill(skill.name)}
                       id={`skill-${skill.id || idx}`}
                     />
-                    <label className="form-check-label" htmlFor={`skill-${skill.id || idx}`}>
-                      {skill.name}
-                    </label>
+                    <label className="form-check-label" htmlFor={`skill-${skill.id || idx}`}>{skill.name}</label>
                   </div>
                 ))}
               </div>

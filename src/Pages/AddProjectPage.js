@@ -31,8 +31,7 @@ function AddProjectPage({ show, onClose, onProjectAdded }) {
     const token = localStorage.getItem('token');
 
     try {
-      const skillsRes = await axios.get('https://server-l1gu.onrender.com/api/skills');
-      const skillIds = skillsRes.data
+      const skillIds = allSkills
         .filter(s => selectedSkills.includes(s.name))
         .map(s => s.id);
 

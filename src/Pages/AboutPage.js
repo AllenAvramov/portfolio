@@ -87,7 +87,7 @@ The project uses a clean, component-based architecture and implements modern web
         <span className="command">$</span> ls
       </p>
       <div className="skills-section">
-        <h3 className="section-title">Proficient With</h3>
+        <h3 className="section-title">In this Project We Used:</h3>
         <div className="skills-grid">
           {proficientWith.map((skill, i) => (
             <div key={i} className="skill-item">
