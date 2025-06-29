@@ -41,7 +41,7 @@ function AppRoutes() {
       <>
         <NavBar />
         <div style={{ padding: '50px', textAlign: 'center', fontSize: '1.5rem' }}>
-          האתר כרגע בתחזוקה. נחזור לפעילות בהקדם!
+        The site is currently under maintenance. We will be back online shortly!
         </div>
       </>
     );
