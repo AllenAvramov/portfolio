@@ -38,9 +38,9 @@ function AddProjectPage({ show, onClose, onProjectAdded }) {
       await axios.post('https://server-l1gu.onrender.com/api/projects', {
         title,
         description,
-        image_url: imageUrl,
-        live_url: liveUrl,
-        github_url: githubUrl,
+        image: imageUrl,
+        live: liveUrl,
+        github: githubUrl,
         technologies: skillIds
       }, {
         headers: { Authorization: `Bearer ${token}` }

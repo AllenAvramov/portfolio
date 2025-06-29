@@ -65,9 +65,9 @@ function EditProjectPage() {
         {
           title,
           description,
-          image_url: imageUrl,
-          live_url: liveUrl,
-          github_url: githubUrl,
+          image: imageUrl,
+          live: liveUrl,
+          github: githubUrl,
           technologies: skillIds
         },
         { headers: { Authorization: `Bearer ${token}` } }
