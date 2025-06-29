@@ -1,28 +1,33 @@
 import React, { useEffect, useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import axios from 'axios';
-import './AddProjectPage.css'; 
+import './AddProjectPage.css';
 
 function EditProjectPage() {
   const { id } = useParams();      // id from URL id
   const navigate = useNavigate();
 
-  const [title,        setTitle]        = useState('');
-  const [description,  setDescription]  = useState('');
-  const [imageUrl,     setImageUrl]     = useState('');
-  const [liveUrl,      setLiveUrl]      = useState('');
-  const [githubUrl,    setGithubUrl]    = useState('');
-  const [allSkills,    setAllSkills]    = useState([]); // [{id,name}]
-  const [selectedIds,  setSelectedIds]  = useState([]); 
-  const [loading,      setLoading]      = useState(true);
+  const [title, setTitle] = useState('');
+  const [description, setDescription] = useState('');
+  const [imageUrl, setImageUrl] = useState('');
+  const [liveUrl, setLiveUrl] = useState('');
+  const [githubUrl, setGithubUrl] = useState('');
+  const [allSkills, setAllSkills] = useState([]); // [{id,name}]
+  const [selectedIds, setSelectedIds] = useState([]);
+  const [loading, setLoading] = useState(true);
 
 
   useEffect(() => {
     (async () => {
       try {
+        const token = localStorage.getItem('token');
         const [projectRes, skillsRes] = await Promise.all([
-          axios.get(`https://server-l1gu.onrender.com/api/projects/${id}`),
-          axios.get('https://server-l1gu.onrender.com/api/skills')
+          axios.get(`https://server-l1gu.onrender.com/api/projects/${id}`, {
+            headers: { Authorization: `Bearer ${token}` }
+          }),
+          axios.get('https://server-l1gu.onrender.com/api/skills', {
+            headers: { Authorization: `Bearer ${token}` }
+          })
         ]);
 
         const project = projectRes.data;
@@ -49,7 +54,7 @@ function EditProjectPage() {
   const toggleSkill = (skillId) => {
     setSelectedIds(prev =>
       prev.includes(skillId) ? prev.filter(id => id !== skillId)
-                             : [...prev, skillId]
+        : [...prev, skillId]
     );
   };
 
@@ -65,7 +70,7 @@ function EditProjectPage() {
           title,
           description,
           image_url: imageUrl,
-          live_url:  liveUrl,
+          live_url: liveUrl,
           github_url: githubUrl,
           technologies: selectedIds          // send IDs only
         },
@@ -89,11 +94,11 @@ function EditProjectPage() {
 
         <form onSubmit={handleSubmit}>
           {/* basic fields */}
-          <input   value={title}       onChange={e=>setTitle(e.target.value)}       placeholder="Title" required />
-          <textarea value={description} onChange={e=>setDescription(e.target.value)} placeholder="Description" required />
-          <input   value={imageUrl}    onChange={e=>setImageUrl(e.target.value)}    placeholder="Image URL" />
-          <input   value={liveUrl}     onChange={e=>setLiveUrl(e.target.value)}     placeholder="Live URL" />
-          <input   value={githubUrl}   onChange={e=>setGithubUrl(e.target.value)}   placeholder="GitHub URL" />
+          <input value={title} onChange={e => setTitle(e.target.value)} placeholder="Title" required />
+          <textarea value={description} onChange={e => setDescription(e.target.value)} placeholder="Description" required />
+          <input value={imageUrl} onChange={e => setImageUrl(e.target.value)} placeholder="Image URL" />
+          <input value={liveUrl} onChange={e => setLiveUrl(e.target.value)} placeholder="Live URL" />
+          <input value={githubUrl} onChange={e => setGithubUrl(e.target.value)} placeholder="GitHub URL" />
 
           <h4>Technologies</h4>
           <div className="skills-list">
