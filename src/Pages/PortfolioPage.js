@@ -48,15 +48,18 @@ function PortfolioPage() {
   return (
     <div className="container mt-5">
       <h1 className="text-center mb-5">My Portfolio</h1>
-      <input
-        type="text"
-        className="form-control mb-4"
-        placeholder="Search project name"
-        value={searchTerm}
-        onChange={(e) => setSearchTerm(e.target.value)}
-      />
+      <form onSubmit={(e) => e.preventDefault()}>
+  <input
+    type="text"
+    className="form-control mb-4"
+    placeholder="Search project"
+    value={searchTerm}
+    onChange={(e) => setSearchTerm(e.target.value)}
+  />
+</form>
+
       <div className="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
-        {projects.map(project => (
+        {filteredProjects.map(project => (
           <ProjectCard key={project.id} project={project} />
         ))}
       </div>
