@@ -6,6 +6,8 @@ function PortfolioPage() {
   const [projects, setProjects] = useState([]);
   const [loading, setLoading] = useState(true);
   const [searchTerm, setSearchTerm] = useState(''); //for searching prohect by names
+  const [selectedTech, setSelectedTech] = useState('');
+  const [showFilterMenu, setShowFilterMenu] = useState(false); //for filter according to technologies
 
   useEffect(() => {
     console.log('Fetching projects...');
@@ -21,9 +23,15 @@ function PortfolioPage() {
       });
   }, []);
 
-  //search projects
+    // extract unique technologies
+  const allTechnologies = Array.from(new Set(
+    projects.flatMap(p => p.technologies || [])
+  ));
+
+    //search projects
     const filteredProjects = projects.filter(project =>
-    project.title.toLowerCase().includes(searchTerm.toLowerCase())
+    project.title.toLowerCase().includes(searchTerm.toLowerCase()) &&
+    (selectedTech === '' || (project.technologies || []).includes(selectedTech))
   );
 
   if (loading) {
@@ -47,22 +55,67 @@ function PortfolioPage() {
 
   return (
     <div className="container mt-5">
-      <h1 className="text-center mb-5">My Portfolio</h1>
-      <form onSubmit={(e) => e.preventDefault()}>
-  <input
-    type="text"
-    className="form-control mb-4"
-    placeholder="Search project"
-    value={searchTerm}
-    onChange={(e) => setSearchTerm(e.target.value)}
-  />
-</form>
+      <h1 className="text-center mb-4">My Portfolio</h1>
 
-      <div className="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
-        {filteredProjects.map(project => (
-          <ProjectCard key={project.id} project={project} />
-        ))}
+      <div className="d-flex flex-column flex-md-row gap-3 align-items-stretch mb-4">
+        <input
+          type="text"
+          className="form-control"
+          placeholder="Search project"
+          value={searchTerm}
+          onChange={(e) => setSearchTerm(e.target.value)}
+        />
+
+        <div className="position-relative">
+          <button
+            className="btn btn-outline-secondary w-100"
+            onClick={() => setShowFilterMenu(prev => !prev)}
+          >
+            {selectedTech ? `Filtered by: ${selectedTech}` : "Filter by Technology"}
+          </button>
+
+          {showFilterMenu && (
+            <ul
+              className="list-group position-absolute z-3 bg-white shadow"
+              style={{ maxHeight: '200px', overflowY: 'auto', width: '100%' }}
+            >
+              {allTechnologies.map((tech, i) => (
+                <li
+                  key={i}
+                  className="list-group-item list-group-item-action"
+                  onClick={() => {
+                    setSelectedTech(tech);
+                    setShowFilterMenu(false);
+                  }}
+                  style={{ cursor: 'pointer' }}
+                >
+                  {tech}
+                </li>
+              ))}
+              <li
+                className="list-group-item list-group-item-action text-danger"
+                onClick={() => {
+                  setSelectedTech('');
+                  setShowFilterMenu(false);
+                }}
+                style={{ cursor: 'pointer' }}
+              >
+                Clear Filter
+              </li>
+            </ul>
+          )}
+        </div>
       </div>
+
+      {filteredProjects.length === 0 ? (
+        <p className="text-center text-muted">No matching projects found.</p>
+      ) : (
+        <div className="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
+          {filteredProjects.map(project => (
+            <ProjectCard key={project.id} project={project} />
+          ))}
+        </div>
+      )}
     </div>
   );
 }
