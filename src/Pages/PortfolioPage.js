@@ -5,6 +5,7 @@ import ProjectCard from '../Components/ProjectCard';
 function PortfolioPage() {
   const [projects, setProjects] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [searchTerm, setSearchTerm] = useState(''); //for searching prohect by names
 
   useEffect(() => {
     console.log('Fetching projects...');
@@ -19,6 +20,11 @@ function PortfolioPage() {
         setLoading(false);
       });
   }, []);
+
+  //search projects
+    const filteredProjects = projects.filter(project =>
+    project.title.toLowerCase().includes(searchTerm.toLowerCase())
+  );
 
   if (loading) {
     return (
@@ -42,6 +48,13 @@ function PortfolioPage() {
   return (
     <div className="container mt-5">
       <h1 className="text-center mb-5">My Portfolio</h1>
+      <input
+        type="text"
+        className="form-control mb-4"
+        placeholder="Search project name"
+        value={searchTerm}
+        onChange={(e) => setSearchTerm(e.target.value)}
+      />
       <div className="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
         {projects.map(project => (
           <ProjectCard key={project.id} project={project} />
