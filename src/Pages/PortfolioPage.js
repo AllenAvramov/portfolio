@@ -8,6 +8,8 @@ function PortfolioPage() {
   const [searchTerm, setSearchTerm] = useState(''); //for searching prohect by names
   const [selectedTech, setSelectedTech] = useState('');
   const [showFilterMenu, setShowFilterMenu] = useState(false); //for filter according to technologies
+  const [selectedTrack, setSelectedTrack] = useState(''); //filter according to acdamic track
+  const [showTrackMenu, setShowTrackMenu] = useState(false);
 
   useEffect(() => {
     console.log('Fetching projects...');
@@ -23,16 +25,21 @@ function PortfolioPage() {
       });
   }, []);
 
+  //acdamic track list
+  const allTracks = Array.from(new Set(projects.map(p => p.academicTrack).filter(Boolean)));
+
     // extract unique technologies
   const allTechnologies = Array.from(new Set(
     projects.flatMap(p => p.technologies || [])
   ));
 
-    //search projects
+    //search projects and filter
     const filteredProjects = projects.filter(project =>
-    project.title.toLowerCase().includes(searchTerm.toLowerCase()) &&
-    (selectedTech === '' || (project.technologies || []).includes(selectedTech))
-  );
+  project.title.toLowerCase().includes(searchTerm.toLowerCase()) &&
+  (selectedTech === '' || (project.technologies || []).includes(selectedTech)) &&
+  (selectedTrack === '' || project.academicTrack === selectedTrack)
+);
+
 
   if (loading) {
     return (
@@ -105,8 +112,48 @@ function PortfolioPage() {
             </ul>
           )}
         </div>
-      </div>
 
+ {/* Filter by Academic Track */}
+  <div className="position-relative">
+    <button
+      className="btn btn-outline-secondary w-100"
+      onClick={() => setShowTrackMenu(prev => !prev)}
+    >
+      {selectedTrack ? `Filtered by: ${selectedTrack}` : "Filter by Track"}
+    </button>
+
+    {showTrackMenu && (
+      <ul
+        className="list-group position-absolute z-3 bg-white shadow"
+        style={{ maxHeight: '200px', overflowY: 'auto', width: '100%' }}
+      >
+        {allTracks.map((track, i) => (
+          <li
+            key={i}
+            className="list-group-item list-group-item-action"
+            onClick={() => {
+              setSelectedTrack(track);
+              setShowTrackMenu(false);
+            }}
+            style={{ cursor: 'pointer' }}
+          >
+            {track}
+          </li>
+        ))}
+        <li
+          className="list-group-item list-group-item-action text-danger"
+          onClick={() => {
+            setSelectedTrack('');
+            setShowTrackMenu(false);
+          }}
+          style={{ cursor: 'pointer' }}
+        >
+          Clear Filter
+        </li>
+      </ul>
+    )}
+  </div>
+      </div>
       {filteredProjects.length === 0 ? (
         <p className="text-center text-muted">No matching projects found.</p>
       ) : (
