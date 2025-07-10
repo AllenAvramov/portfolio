@@ -12,6 +12,10 @@ function ProjectCard({ project }) {
         <div className="card-body text-center">
           <h5 className="card-title fw-bold">{project.title}</h5>
           <p className="card-text text-muted">{project.description}</p>
+          {project.academic_track && (
+          <p className="text-muted mb-2"><strong>Track:</strong> {project.academic_track}</p>
+          )}
+
 
           {project.technologies && (
             <div className="mb-3 d-flex justify-content-center flex-wrap gap-2">
