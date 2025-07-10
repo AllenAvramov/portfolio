@@ -26,7 +26,7 @@ function PortfolioPage() {
   }, []);
 
   //acdamic track list
-  const allTracks = Array.from(new Set(projects.map(p => p.academicTrack).filter(Boolean)));
+  const allTracks = Array.from(new Set(projects.map(p => p.academic_track).filter(Boolean)));
 
     // extract unique technologies
   const allTechnologies = Array.from(new Set(
