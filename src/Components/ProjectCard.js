@@ -72,7 +72,7 @@ function ProjectCard({ project }) {
   )}
 
 {project.youtube_url && (
-  <p><strong>Demo Video:</strong> <a href={project.youtube_url} target="_blank" rel="noreferrer">Watch</a></p>
+  <p><strong>Youtube Video:</strong> <a href={project.youtube_url} target="_blank" rel="noreferrer">Watch</a></p>
 )}
 </div>
 
