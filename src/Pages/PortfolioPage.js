@@ -37,7 +37,7 @@ function PortfolioPage() {
     const filteredProjects = projects.filter(project =>
   project.title.toLowerCase().includes(searchTerm.toLowerCase()) &&
   (selectedTech === '' || (project.technologies || []).includes(selectedTech)) &&
-  (selectedTrack === '' || project.academicTrack === selectedTrack)
+  (selectedTrack === '' || project.academic_track === selectedTrack)
 );
 
 
