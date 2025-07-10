@@ -48,20 +48,30 @@ function ProjectCard({ project }) {
                 <h5 className="modal-title">{project.title}</h5>
                 <button type="button" className="btn-close" onClick={() => setShowModal(false)}></button>
               </div>
-              <div className="modal-body text-start">
-                <p><strong>Description:</strong> {project.fullDescription || project.description}</p>
-                {project.students && <p><strong>Students:</strong> {project.students.join(', ')}</p>}
-                {project.mentor && <p><strong>Mentor:</strong> {project.mentor}</p>}
-                {project.technologies && (
-                  <p><strong>Technologies:</strong> {project.technologies.join(', ')}</p>
-                )}
-                {project.media?.youtube && (
-                  <p><strong>Demo Video:</strong> <a href={project.media.youtube} target="_blank" rel="noreferrer">Watch</a></p>
-                )}
-                {project.documents?.pdf && (
-                  <p><strong>Document:</strong> <a href={project.documents.pdf} target="_blank" rel="noreferrer">View PDF</a></p>
-                )}
-              </div>
+             <div className="modal-body text-start">
+  <p><strong>Description:</strong> {project.fullDescription}</p>
+
+  {project.academic_track && (
+    <p><strong>Academic Track:</strong> {project.academic_track}</p>
+  )}
+
+ {project.students && (
+  <p><strong>Students:</strong> {project.students}</p>
+)}
+
+  {project.mentor && (
+    <p><strong>Mentor:</strong> {project.mentor}</p>
+  )}
+
+  {project.technologies && (
+    <p><strong>Technologies:</strong> {project.technologies.join(', ')}</p>
+  )}
+
+  {project.media?.youtube && (
+    <p><strong>Demo Video:</strong> <a href={project.media.youtube} target="_blank" rel="noreferrer">Watch</a></p>
+  )}
+</div>
+
               <div className="modal-footer">
                 <button className="btn btn-secondary" onClick={() => setShowModal(false)}>Close</button>
               </div>
