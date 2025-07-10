@@ -49,7 +49,7 @@ function ProjectCard({ project }) {
                 <button type="button" className="btn-close" onClick={() => setShowModal(false)}></button>
               </div>
              <div className="modal-body text-start">
-  <p><strong>Description:</strong> {project.fullDescription}</p>
+  <p><strong>Description:</strong> {project.fullDescription || project.description}</p>
 
   {project.academic_track && (
     <p><strong>Academic Track:</strong> {project.academic_track}</p>
@@ -67,9 +67,9 @@ function ProjectCard({ project }) {
     <p><strong>Technologies:</strong> {project.technologies.join(', ')}</p>
   )}
 
-  {project.media?.youtube && (
-    <p><strong>Demo Video:</strong> <a href={project.media.youtube} target="_blank" rel="noreferrer">Watch</a></p>
-  )}
+{project.youtube_url && (
+  <p><strong>Demo Video:</strong> <a href={project.youtube_url} target="_blank" rel="noreferrer">Watch</a></p>
+)}
 </div>
 
               <div className="modal-footer">
