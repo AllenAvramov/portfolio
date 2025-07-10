@@ -49,7 +49,7 @@ function ProjectCard({ project }) {
                 <button type="button" className="btn-close" onClick={() => setShowModal(false)}></button>
               </div>
              <div className="modal-body text-start">
-  <p><strong>Description:</strong> {project.fullDescription || project.description}</p>
+  <p><strong>Description:</strong> {project.full_description || project.description}</p>
 
   {project.academic_track && (
     <p><strong>Academic Track:</strong> {project.academic_track}</p>
