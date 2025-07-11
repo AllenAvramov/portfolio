@@ -4,43 +4,49 @@ import MockupImage from './MockupForProj/MockupImage';
 
 function ProjectCard({ project }) {
   const [showModal, setShowModal] = useState(false);
-  const [rating, setRating] = useState(0); // User's current selected rating
-  const [avgRating, setAvgRating] = useState(0); // Average rating from DB
-  const [count, setCount] = useState(0); // Total number of ratings
 
-  // Fetch average rating and count on mount
+  const [rating, setRating] = useState(0); // User's rating (stored locally)
+  const [avgRating, setAvgRating] = useState(0); // Average rating from DB
+  const [count, setCount] = useState(0); // Number of total ratings
+
+  // Fetch average rating + saved user rating on load
   useEffect(() => {
+    fetchRating();
     const saved = localStorage.getItem(`rating-${project.id}`);
-    if (saved) {
-      setRating(parseInt(saved));
-    }
+    if (saved) setRating(parseInt(saved));
   }, [project.id]);
 
-  // Handle user rating click
-  const handleRate = (r) => {
-    setRating(r);
-    localStorage.setItem(`rating-${project.id}`, r);
-    axios.post('/api/ratings', { project_id: project.id, rating: r })
-      .then(() => axios.get(`/api/ratings/${project.id}`))
+  // Function to fetch rating info from backend
+  const fetchRating = () => {
+    axios.get(`/api/ratings/${project.id}`)
       .then(res => {
-        setAvgRating(res.data.average);
-        setCount(res.data.count);
+        setAvgRating(res.data.average || 0);
+        setCount(res.data.count || 0);
       })
       .catch(console.error);
   };
 
-  // Render stars based on value
-  const renderStars = (current, clickable = false, onClick) =>
+  // Handle rating click
+  const handleRate = (r) => {
+    setRating(r);
+    localStorage.setItem(`rating-${project.id}`, r);
+    axios.post('/api/ratings', { project_id: project.id, rating: r })
+      .then(() => fetchRating()) // Refresh avg after vote
+      .catch(console.error);
+  };
+
+  // Render star icons
+  const renderStars = (value, clickable = false, onClick) =>
     [1, 2, 3, 4, 5].map(n => (
       <i
         key={n}
         className={
-          n <= (clickable ? current : Math.round(current))
+          n <= (clickable ? value : Math.round(value))
             ? 'bi bi-star-fill text-warning'
             : 'bi bi-star'
         }
         style={{ cursor: clickable ? 'pointer' : 'default', fontSize: '1.2rem' }}
-        onClick={clickable ? () => onClick(n) : null}
+        onClick={clickable ? () => onClick(n) : undefined}
       />
     ));
 
@@ -48,7 +54,6 @@ function ProjectCard({ project }) {
     <div className="col hover-lift">
       <div className="card h-100 w-80 mx-auto project-card-style">
         <MockupImage projectImage={project.image} />
-
         <div className="card-body text-center">
           <h5 className="card-title fw-bold">{project.title}</h5>
           <p className="card-text text-muted">{project.description}</p>
@@ -81,25 +86,26 @@ function ProjectCard({ project }) {
             </button>
           </div>
 
-          {/* Average Rating View (Not clickable) */}
+          {/* Static (non-clickable) average rating under card */}
           <div className="rating mt-3">
             {renderStars(avgRating)} <span>({count})</span>
           </div>
         </div>
       </div>
 
-      {/* Modal with full info and interactive rating */}
+      {/* Modal with full details and rating input */}
       {showModal && (
         <div className="modal show fade d-block" tabIndex="-1" role="dialog" style={{ backgroundColor: 'rgba(0,0,0,0.5)' }}>
           <div className="modal-dialog modal-lg" role="document">
             <div className="modal-content">
               <div className="modal-header">
                 <h5 className="modal-title">{project.title}</h5>
-                <button type="button" className="btn-close" onClick={() => setShowModal(false)}></button>
+                <button type="button" className="btn-close" onClick={() => setShowModal(false)} />
               </div>
 
               <div className="modal-body text-start">
                 <p><strong>Description:</strong> {project.full_description || project.description}</p>
+
                 {project.academic_track && (
                   <p><strong>Academic Track:</strong> {project.academic_track}</p>
                 )}
@@ -116,20 +122,22 @@ function ProjectCard({ project }) {
                   <p><strong>Youtube Video:</strong> <a href={project.youtube_url} target="_blank" rel="noreferrer">Watch</a></p>
                 )}
 
-                {/*Interactive Rating Section */}
+                {/* Interactive star rating section */}
                 <div className="my-3">
                   <strong>Rate this project:</strong>
                   <div className="d-flex gap-1 mt-1">
                     {renderStars(rating, true, handleRate)}
                   </div>
-                <small className="text-muted">
-                  Average: {isNaN(avgRating) ? 'N/A' : avgRating.toFixed(1)} ({count} votes)
-                </small>
+                  <small className="text-muted">
+                    Average: {isNaN(avgRating) ? 'N/A' : avgRating.toFixed(1)} ({count} votes)
+                  </small>
                 </div>
               </div>
 
               <div className="modal-footer">
-                <button className="btn btn-secondary" onClick={() => setShowModal(false)}>Close</button>
+                <button className="btn btn-secondary" onClick={() => setShowModal(false)}>
+                  Close
+                </button>
               </div>
             </div>
           </div>
