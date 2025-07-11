@@ -14,6 +14,9 @@ function AddProjectPage({ show, onClose, onProjectAdded }) {
   const [githubUrl, setGithubUrl] = useState('');
   const [allSkills, setAllSkills] = useState([]);
   const [selectedSkills, setSelectedSkills] = useState([]);
+  const [newSkill, setNewSkill] = useState('');
+  const [newCategory, setNewCategory] = useState('web');
+  const [addingSkill, setAddingSkill] = useState(false);
 
   useEffect(() => {
     if (show) {
@@ -29,6 +32,28 @@ function AddProjectPage({ show, onClose, onProjectAdded }) {
         ? prev.filter(s => s !== skillName)
         : [...prev, skillName]
     );
+  };
+
+  const addNewSkill = async () => {
+    const trimmed = newSkill.trim();
+    if (!trimmed || allSkills.some(s => s.name.toLowerCase() === trimmed.toLowerCase())) return;
+
+    try {
+      const res = await axios.post('https://server-l1gu.onrender.com/api/skills', {
+        name: trimmed,
+        category: newCategory
+      });
+
+      const savedSkill = res.data;
+      setAllSkills(prev => [...prev, savedSkill]);
+      setSelectedSkills(prev => [...prev, savedSkill.name]);
+      setNewSkill('');
+      setNewCategory('web');
+      setAddingSkill(false);
+    } catch (err) {
+      console.error('Failed to add skill to server', err);
+      alert('Failed to add skill to database');
+    }
   };
 
   const handleSubmit = async (e) => {
@@ -92,12 +117,9 @@ function AddProjectPage({ show, onClose, onProjectAdded }) {
           </div>
           <form onSubmit={handleSubmit}>
             <div className="modal-body">
-              {/* Basic Info */}
               <input className="form-control mb-2" placeholder="Title" value={title} onChange={e => setTitle(e.target.value)} required />
               <textarea className="form-control mb-2" placeholder="Short Description" value={description} onChange={e => setDescription(e.target.value)} required />
               <textarea className="form-control mb-2" placeholder="Full Description" value={full_description} onChange={e => setFullDescription(e.target.value)} />
-
-              {/* Additional Info */}
               <input className="form-control mb-2" placeholder="Academic Track" value={academic_track} onChange={e => setAcademicTrack(e.target.value)} />
               <input className="form-control mb-2" placeholder="Students" value={students} onChange={e => setStudents(e.target.value)} />
               <input className="form-control mb-2" placeholder="Mentor" value={mentor} onChange={e => setMentor(e.target.value)} />
@@ -106,7 +128,6 @@ function AddProjectPage({ show, onClose, onProjectAdded }) {
               <input className="form-control mb-2" placeholder="Live URL" value={liveUrl} onChange={e => setLiveUrl(e.target.value)} />
               <input className="form-control mb-2" placeholder="GitHub URL" value={githubUrl} onChange={e => setGithubUrl(e.target.value)} />
 
-              {/* Technologies */}
               <h6 className="mt-3">Technologies:</h6>
               <div className="d-flex flex-wrap gap-2 mb-2" style={{ maxHeight: 200, overflowY: 'auto' }}>
                 {allSkills.map((skill, idx) => (
@@ -123,6 +144,41 @@ function AddProjectPage({ show, onClose, onProjectAdded }) {
                     </label>
                   </div>
                 ))}
+              </div>
+
+              <div className="mb-3 mt-2 w-100">
+                {addingSkill ? (
+                  <div className="d-flex flex-column gap-2">
+                    <input
+                      type="text"
+                      className="form-control"
+                      placeholder="New Technology Name"
+                      value={newSkill}
+                      onChange={(e) => setNewSkill(e.target.value)}
+                    />
+                    <select
+                      className="form-select"
+                      value={newCategory}
+                      onChange={(e) => setNewCategory(e.target.value)}
+                    >
+                      <option value="web">Web</option>
+                      <option value="programming">Programming</option>
+                      <option value="database">Database</option>
+                    </select>
+                    <div className="d-flex gap-2">
+                      <button className="btn btn-success w-100" type="button" onClick={addNewSkill}>
+                        Add
+                      </button>
+                      <button className="btn btn-outline-secondary w-100" type="button" onClick={() => setAddingSkill(false)}>
+                        Cancel
+                      </button>
+                    </div>
+                  </div>
+                ) : (
+                  <button className="btn btn-sm btn-outline-primary" type="button" onClick={() => setAddingSkill(true)}>
+                    + Add New Technology
+                  </button>
+                )}
               </div>
             </div>
             <div className="modal-footer">
