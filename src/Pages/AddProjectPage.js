@@ -4,6 +4,11 @@ import axios from 'axios';
 function AddProjectPage({ show, onClose, onProjectAdded }) {
   const [title, setTitle] = useState('');
   const [description, setDescription] = useState('');
+  const [full_description, setFullDescription] = useState('');
+  const [academic_track, setAcademicTrack] = useState('');
+  const [students, setStudents] = useState('');
+  const [mentor, setMentor] = useState('');
+  const [youtube_url, setYoutubeUrl] = useState('');
   const [imageUrl, setImageUrl] = useState('');
   const [liveUrl, setLiveUrl] = useState('');
   const [githubUrl, setGithubUrl] = useState('');
@@ -38,6 +43,11 @@ function AddProjectPage({ show, onClose, onProjectAdded }) {
       await axios.post('https://server-l1gu.onrender.com/api/projects', {
         title,
         description,
+        full_description,
+        academic_track,
+        students,
+        mentor,
+        youtube_url,
         image: imageUrl,
         live: liveUrl,
         github: githubUrl,
@@ -75,12 +85,21 @@ function AddProjectPage({ show, onClose, onProjectAdded }) {
           </div>
           <form onSubmit={handleSubmit}>
             <div className="modal-body">
-              <input type="text" className="form-control mb-2" placeholder="Title" value={title} onChange={e => setTitle(e.target.value)} required />
-              <textarea className="form-control mb-2" placeholder="Description" value={description} onChange={e => setDescription(e.target.value)} required />
-              <input type="text" className="form-control mb-2" placeholder="Image URL" value={imageUrl} onChange={e => setImageUrl(e.target.value)} />
-              <input type="text" className="form-control mb-2" placeholder="Live URL" value={liveUrl} onChange={e => setLiveUrl(e.target.value)} />
-              <input type="text" className="form-control mb-2" placeholder="GitHub URL" value={githubUrl} onChange={e => setGithubUrl(e.target.value)} />
+              {/* Basic Info */}
+              <input className="form-control mb-2" placeholder="Title" value={title} onChange={e => setTitle(e.target.value)} required />
+              <textarea className="form-control mb-2" placeholder="Short Description" value={description} onChange={e => setDescription(e.target.value)} required />
+              <textarea className="form-control mb-2" placeholder="Full Description" value={full_description} onChange={e => setFullDescription(e.target.value)} />
 
+              {/* Additional Info */}
+              <input className="form-control mb-2" placeholder="Academic Track" value={academic_track} onChange={e => setAcademicTrack(e.target.value)} />
+              <input className="form-control mb-2" placeholder="Students" value={students} onChange={e => setStudents(e.target.value)} />
+              <input className="form-control mb-2" placeholder="Mentor" value={mentor} onChange={e => setMentor(e.target.value)} />
+              <input className="form-control mb-2" placeholder="YouTube URL" value={youtube_url} onChange={e => setYoutubeUrl(e.target.value)} />
+              <input className="form-control mb-2" placeholder="Image URL" value={imageUrl} onChange={e => setImageUrl(e.target.value)} />
+              <input className="form-control mb-2" placeholder="Live URL" value={liveUrl} onChange={e => setLiveUrl(e.target.value)} />
+              <input className="form-control mb-2" placeholder="GitHub URL" value={githubUrl} onChange={e => setGithubUrl(e.target.value)} />
+
+              {/* Technologies */}
               <h6 className="mt-3">Technologies:</h6>
               <div className="d-flex flex-wrap gap-2 mb-2" style={{ maxHeight: 200, overflowY: 'auto' }}>
                 {allSkills.map((skill, idx) => (
