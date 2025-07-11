@@ -4,12 +4,11 @@ import MockupImage from './MockupForProj/MockupImage';
 
 function ProjectCard({ project }) {
   const [showModal, setShowModal] = useState(false);
+  const [rating, setRating] = useState(0); // User's current selected rating
+  const [avgRating, setAvgRating] = useState(0); // Average rating from DB
+  const [count, setCount] = useState(0); // Total number of ratings
 
-  const [rating, setRating] = useState(0); // user's current rating click
-  const [avgRating, setAvgRating] = useState(0); // current average rating from server
-  const [count, setCount] = useState(0); // total number of ratings
-
-  // Fetch average rating and count from backend when project loads
+  // Fetch average rating and count on mount
   useEffect(() => {
     axios.get(`/api/ratings/${project.id}`)
       .then(res => {
@@ -19,11 +18,11 @@ function ProjectCard({ project }) {
       .catch(console.error);
   }, [project.id]);
 
-  // User clicks a rating star
+  // Handle user rating click
   const handleRate = (r) => {
-    setRating(r); // visually update stars
+    setRating(r);
     axios.post('/api/ratings', { project_id: project.id, rating: r })
-      .then(() => axios.get(`/api/ratings/${project.id}`)) // refresh avg/count
+      .then(() => axios.get(`/api/ratings/${project.id}`))
       .then(res => {
         setAvgRating(res.data.average);
         setCount(res.data.count);
@@ -31,7 +30,7 @@ function ProjectCard({ project }) {
       .catch(console.error);
   };
 
-  // Render 5 stars, optionally clickable
+  // Render stars based on value
   const renderStars = (current, clickable = false, onClick) =>
     [1, 2, 3, 4, 5].map(n => (
       <i
@@ -83,14 +82,14 @@ function ProjectCard({ project }) {
             </button>
           </div>
 
-          {/* Rating summary below card */}
+          {/* Average Rating View (Not clickable) */}
           <div className="rating mt-3">
             {renderStars(avgRating)} <span>({count})</span>
           </div>
         </div>
       </div>
 
-      {/* Modal for full project info and rating input */}
+      {/* Modal with full info and interactive rating */}
       {showModal && (
         <div className="modal show fade d-block" tabIndex="-1" role="dialog" style={{ backgroundColor: 'rgba(0,0,0,0.5)' }}>
           <div className="modal-dialog modal-lg" role="document">
@@ -118,7 +117,7 @@ function ProjectCard({ project }) {
                   <p><strong>Youtube Video:</strong> <a href={project.youtube_url} target="_blank" rel="noreferrer">Watch</a></p>
                 )}
 
-                {/* Rating input section */}
+                {/* ⭐ Interactive Rating Section */}
                 <div className="my-3">
                   <strong>Rate this project:</strong>
                   <div className="d-flex gap-1 mt-1">
