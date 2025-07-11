@@ -10,17 +10,16 @@ function ProjectCard({ project }) {
 
   // Fetch average rating and count on mount
   useEffect(() => {
-    axios.get(`/api/ratings/${project.id}`)
-      .then(res => {
-        setAvgRating(res.data.average || 0);
-        setCount(res.data.count || 0);
-      })
-      .catch(console.error);
+    const saved = localStorage.getItem(`rating-${project.id}`);
+    if (saved) {
+      setRating(parseInt(saved));
+    }
   }, [project.id]);
 
   // Handle user rating click
   const handleRate = (r) => {
     setRating(r);
+    localStorage.setItem(`rating-${project.id}`, r);
     axios.post('/api/ratings', { project_id: project.id, rating: r })
       .then(() => axios.get(`/api/ratings/${project.id}`))
       .then(res => {
@@ -117,13 +116,15 @@ function ProjectCard({ project }) {
                   <p><strong>Youtube Video:</strong> <a href={project.youtube_url} target="_blank" rel="noreferrer">Watch</a></p>
                 )}
 
-                {/* ⭐ Interactive Rating Section */}
+                {/*Interactive Rating Section */}
                 <div className="my-3">
                   <strong>Rate this project:</strong>
                   <div className="d-flex gap-1 mt-1">
                     {renderStars(rating, true, handleRate)}
                   </div>
-                  <small className="text-muted">Average: {avgRating.toFixed(1)} ({count} votes)</small>
+                <small className="text-muted">
+                  Average: {isNaN(avgRating) ? 'N/A' : avgRating.toFixed(1)} ({count} votes)
+                </small>
                 </div>
               </div>
 
