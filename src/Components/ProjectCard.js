@@ -4,38 +4,35 @@ import MockupImage from './MockupForProj/MockupImage';
 
 function ProjectCard({ project }) {
   const [showModal, setShowModal] = useState(false);
+  const [rating, setRating] = useState(0); // local rating value
+  const [avgRating, setAvgRating] = useState(project.average_rating || 0);
+  const [count, setCount] = useState(project.rating_count || 0);
 
-  const [rating, setRating] = useState(0); // User's rating (stored locally)
-  const [avgRating, setAvgRating] = useState(0); // Average rating from DB
-  const [count, setCount] = useState(0); // Number of total ratings
-
-  // Fetch average rating + saved user rating on load
+  // Load rating from localStorage when component mounts
   useEffect(() => {
-    fetchRating();
     const saved = localStorage.getItem(`rating-${project.id}`);
-    if (saved) setRating(parseInt(saved));
+    if (saved) {
+      setRating(parseInt(saved));
+    }
   }, [project.id]);
-
-  // Function to fetch rating info from backend
-  const fetchRating = () => {
-    axios.get(`/api/ratings/${project.id}`)
-      .then(res => {
-        setAvgRating(res.data.average || 0);
-        setCount(res.data.count || 0);
-      })
-      .catch(console.error);
-  };
 
   // Handle rating click
   const handleRate = (r) => {
     setRating(r);
     localStorage.setItem(`rating-${project.id}`, r);
+
     axios.post('/api/ratings', { project_id: project.id, rating: r })
-      .then(() => fetchRating()) // Refresh avg after vote
+      .then(() => {
+        // Update rating locally instead of refetching
+        const newCount = count + 1;
+        const newAvg = ((avgRating * count) + r) / newCount;
+        setAvgRating(parseFloat(newAvg.toFixed(1)));
+        setCount(newCount);
+      })
       .catch(console.error);
   };
 
-  // Render star icons
+  // Render stars (optionally clickable)
   const renderStars = (value, clickable = false, onClick) =>
     [1, 2, 3, 4, 5].map(n => (
       <i
@@ -86,14 +83,14 @@ function ProjectCard({ project }) {
             </button>
           </div>
 
-          {/* Static (non-clickable) average rating under card */}
+          {/* Static average rating display */}
           <div className="rating mt-3">
             {renderStars(avgRating)} <span>({count})</span>
           </div>
         </div>
       </div>
 
-      {/* Modal with full details and rating input */}
+      {/* Modal with full project info + interactive rating */}
       {showModal && (
         <div className="modal show fade d-block" tabIndex="-1" role="dialog" style={{ backgroundColor: 'rgba(0,0,0,0.5)' }}>
           <div className="modal-dialog modal-lg" role="document">
@@ -122,7 +119,7 @@ function ProjectCard({ project }) {
                   <p><strong>Youtube Video:</strong> <a href={project.youtube_url} target="_blank" rel="noreferrer">Watch</a></p>
                 )}
 
-                {/* Interactive star rating section */}
+                {/* Rating block */}
                 <div className="my-3">
                   <strong>Rate this project:</strong>
                   <div className="d-flex gap-1 mt-1">
