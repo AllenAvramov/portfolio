@@ -70,15 +70,22 @@ function AddProjectPage({ show, onClose, onProjectAdded }) {
   return (
     <div className="modal show fade" tabIndex="-1" style={{
       display: 'flex',
-      background: 'rgba(0,0,0,0.8)',
+      backgroundColor: 'rgba(0,0,0,0.5)',
       alignItems: 'center',
       justifyContent: 'center',
       position: 'fixed',
       top: 0, left: 0, width: '100vw', height: '100vh',
-      zIndex: 1050
+      zIndex: 1050,
+      padding: '2rem'
     }}>
-      <div className="modal-dialog modal-dialog-centered" style={{ maxWidth: 500 }}>
-        <div className="modal-content">
+      <div className="modal-dialog" style={{
+        maxWidth: 600,
+        width: '100%'
+      }}>
+        <div className="modal-content" style={{
+          maxHeight: '90vh',
+          overflowY: 'auto'
+        }}>
           <div className="modal-header">
             <h5 className="modal-title">Add New Project</h5>
             <button type="button" className="btn-close" aria-label="Close" onClick={onClose}></button>
