@@ -20,6 +20,7 @@ function EditProjectPage() {
   const [selectedSkills, setSelectedSkills] = useState([]);
   const [loading, setLoading] = useState(true);
 
+  //this is how to edit excist project in the portofilo
   useEffect(() => {
     (async () => {
       try {

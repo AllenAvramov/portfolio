@@ -7,8 +7,7 @@ function AdminLogin({ onLogin }) {
   const [password, setPassword] = useState('');
 
   const handleSubmit = async (e) => {
-    e.preventDefault(); // Hey browser, don’t do your default action when this event happens. (default actions are: reloads the page, tries to send the form data to the server via HTTP (traditional form submission))
-
+    e.preventDefault(); // Hey browser, don’t do your default action when this event happens
     try {
     const res = await axios.post('https://server-l1gu.onrender.com/api/login', {
       username,

@@ -18,6 +18,7 @@ function AddProjectPage({ show, onClose, onProjectAdded }) {
   const [newCategory, setNewCategory] = useState('web');
   const [addingSkill, setAddingSkill] = useState(false);
 
+  //here how to add a new project to our portofilo project
   useEffect(() => {
     if (show) {
       axios.get('https://server-l1gu.onrender.com/api/skills')
