@@ -46,6 +46,14 @@ function ContactPage() {
                 <i className="fab fa-instagram"></i>
               </a>
             </div>
+              <a
+            href="/Tamar_Sapir_CV.pdf"
+            download="Tamar_Sapir_CV.pdf"
+            className="btn btn-primary w-100 mt-3"
+          >
+            <i className="fas fa-file-download me-2"></i>
+            Download Resume (PDF)
+          </a>
           </div>
         </div>
 
