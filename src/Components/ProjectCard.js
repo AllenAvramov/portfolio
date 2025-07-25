@@ -81,7 +81,7 @@ function ProjectCard({ project }) {
               rel="noreferrer"
               className="btn btn-outline-primary btn-sm"
             >
-              <i className="bi bi-facebook me-1" /> Share
+              <i className="bi bi-facebook me-1" /> favebook
             </a>
 
             {/* LinkedIn */}
@@ -101,7 +101,7 @@ function ProjectCard({ project }) {
               rel="noreferrer"
               className="btn btn-outline-dark btn-sm"
             >
-              <i className="bi bi-twitter-x me-1" /> Tweet
+              <i className="bi bi-twitter-x me-1" /> Twitter
             </a>
 
             {/* Copy Link */}
