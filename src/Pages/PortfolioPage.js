@@ -33,12 +33,23 @@ function PortfolioPage() {
     projects.flatMap(p => p.technologies || [])
   ));
 
-    //search projects and filter
-    const filteredProjects = projects.filter(project =>
-  project.title.toLowerCase().includes(searchTerm.toLowerCase()) &&
-  (selectedTech === '' || (project.technologies || []).includes(selectedTech)) &&
-  (selectedTrack === '' || project.academic_track === selectedTrack)
-);
+    //search projects, words and filter
+const filteredProjects = projects.filter(project => {
+  const lowerSearch = searchTerm.toLowerCase();
+
+  const matchesTitle = project.title?.toLowerCase().includes(lowerSearch);
+  const matchesDescription = project.description?.toLowerCase().includes(lowerSearch);
+  const matchesTechnologies = (project.technologies || [])
+    .some(tech => tech.toLowerCase().includes(lowerSearch));
+  const matchesTrack = project.academic_track?.toLowerCase().includes(lowerSearch);
+
+  return (
+    (matchesTitle || matchesDescription || matchesTechnologies || matchesTrack) &&
+    (selectedTech === '' || (project.technologies || []).includes(selectedTech)) &&
+    (selectedTrack === '' || project.academic_track === selectedTrack)
+  );
+});
+
 
 
   if (loading) {
