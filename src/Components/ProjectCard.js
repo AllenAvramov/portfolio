@@ -73,6 +73,49 @@ function ProjectCard({ project }) {
             <button className="btn btn-outline-info" onClick={() => setShowModal(true)}>Read More</button>
           </div>
 
+          <div className="d-flex gap-2 justify-content-center flex-wrap mt-2">
+            {/* Facebook */}
+            <a
+              href={`https://www.facebook.com/sharer/sharer.php?u=${window.location.origin}/project/${project.id}`}
+              target="_blank"
+              rel="noreferrer"
+              className="btn btn-outline-primary btn-sm"
+            >
+              <i className="bi bi-facebook me-1" /> Share
+            </a>
+
+            {/* LinkedIn */}
+            <a
+              href={`https://www.linkedin.com/shareArticle?mini=true&url=${window.location.origin}/project/${project.id}&title=${project.title}`}
+              target="_blank"
+              rel="noreferrer"
+              className="btn btn-outline-info btn-sm"
+            >
+              <i className="bi bi-linkedin me-1" /> LinkedIn
+            </a>
+
+            {/* Twitter */}
+            <a
+              href={`https://twitter.com/intent/tweet?text=${project.title}&url=${window.location.origin}/project/${project.id}`}
+              target="_blank"
+              rel="noreferrer"
+              className="btn btn-outline-dark btn-sm"
+            >
+              <i className="bi bi-twitter-x me-1" /> Tweet
+            </a>
+
+            {/* Copy Link */}
+            <button
+              onClick={() => {
+                navigator.clipboard.writeText(`${window.location.origin}/project/${project.id}`);
+                alert('Link copied!');
+              }}
+              className="btn btn-outline-secondary btn-sm"
+            >
+              <i className="bi bi-clipboard me-1" /> Copy Link
+            </button>
+          </div>
+
           {/* Display average rating */}
           <div className="rating mt-3">
             {renderStars(avgRating)} <span>({count})</span>
